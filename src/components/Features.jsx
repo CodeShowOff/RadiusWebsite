@@ -9,7 +9,10 @@ import {
   MapPin,
   Mic,
   Image,
-  Bell
+  Bell,
+  Globe,
+  BluetoothSearching,
+  HandHeart
 } from 'lucide-react';
 import './Features.css';
 
@@ -52,6 +55,27 @@ const Features = () => {
       description: 'Join community groups anchored to your city or region. Find local events, discussions, and like-minded people.',
       color: '#F59E0B',
       gradient: 'linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%)',
+    },
+    {
+      icon: Globe,
+      title: 'Random Group Chatrooms',
+      description: 'Create or discover internet-based groups by topic. Admin-approved membership ensures quality discussions with like-minded people worldwide.',
+      color: '#8B5CF6',
+      gradient: 'linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%)',
+    },
+    {
+      icon: BluetoothSearching,
+      title: 'Nearby Groups',
+      description: 'Create temporary Bluetooth-based groups for spontaneous meetups. Members automatically join when detected nearby — perfect for events or gatherings.',
+      color: '#3B82F6',
+      gradient: 'linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%)',
+    },
+    {
+      icon: HandHeart,
+      title: 'Nearby Help',
+      description: 'Request or provide help to people in your vicinity. Get notified when someone nearby needs assistance — build a caring community.',
+      color: '#EC4899',
+      gradient: 'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)',
     },
     {
       icon: Shield,

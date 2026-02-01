@@ -26,20 +26,32 @@ const FAQ = () => {
       answer: 'Guess Me is an anonymous icebreaker game where you can chat with a nearby user without knowing who they are. You try to guess each other\'s identity through conversation. If you both enjoy the chat, you can reveal yourselves and connect!',
     },
     {
+      question: 'What are Random Group Chatrooms?',
+      answer: 'Random Group Chatrooms are internet-based groups organized by topics and interests. Users can create groups or request to join existing ones. Group admins review and approve join requests to maintain quality discussions. It\'s perfect for finding like-minded people worldwide!',
+    },
+    {
+      question: 'How do Nearby Groups work?',
+      answer: 'Nearby Groups use Bluetooth to create temporary group chats for spontaneous meetups. When you create a nearby group, your device automatically detects and adds users around you. Perfect for events, gatherings, or any situation where you want to chat with everyone nearby!',
+    },
+    {
+      question: 'What is Nearby Help?',
+      answer: 'Nearby Help lets you request or provide assistance to people in your vicinity. When you need help, users within your selected radius receive a notification. Available helpers can accept your request and navigate to your location. It\'s about building a caring, helpful community!',
+    },
+    {
       question: 'Can someone message me without my permission?',
       answer: 'No. Radius requires mutual consent for all connections. Someone can send you a connection request, but you must accept it before they can message you. This prevents unwanted messages and spam.',
     },
     {
       question: 'Is Radius free to use?',
-      answer: 'Yes! Radius is completely free to download and use. All core features including discovery, messaging, and the Guess Me game are available at no cost.',
+      answer: 'Yes! Radius is completely free to download and use. All core features including discovery, messaging, groups, and the Guess Me game are available at no cost.',
     },
     {
       question: 'Does Radius work without internet?',
-      answer: 'Bluetooth discovery works offline — you can still see nearby users. However, you\'ll need an internet connection to send messages, view profiles, and sync your connections.',
+      answer: 'Bluetooth discovery works offline — you can still see nearby users. However, you\'ll need an internet connection to send messages, view profiles, sync your connections, and use group features.',
     },
     {
       question: 'How do I stop being discoverable?',
-      answer: 'You can turn off discovery anytime in your settings. You can also simply close the app or turn off Bluetooth. When discovery is off, other users won\'t be able to see you.',
+      answer: 'You can turn off discovery anytime in your settings. You can also simply close the app or turn off Bluetooth. When discovery is off, other users won\'t be able to see you. For Nearby Help, you can disable help alerts in settings.',
     },
   ];
 
