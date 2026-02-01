@@ -383,6 +383,19 @@
 }
 
 /* Responsive */
+/* Mobile-only visual hidden on desktop */
+.mobile-visual {
+  display: none;
+}
+
+.mobile-hero-description {
+  display: none;
+}
+
+.desktop-visual {
+  display: flex;
+}
+
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -423,137 +436,72 @@
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
-    padding: 120px 0 60px;
+    padding: 100px 0 50px;
   }
 
-  .orb-1 {
-    width: 400px;
-    height: 400px;
-    top: -10%;
-    left: -30%;
+  /* Hide desktop visual, show mobile visual */
+  .desktop-visual {
+    display: none !important;
   }
 
-  .orb-2 {
-    width: 350px;
-    height: 350px;
-    top: 20%;
-    right: -30%;
-  }
-
-  .orb-3 {
-    width: 300px;
-    height: 300px;
-    bottom: 0%;
-    left: 10%;
+  .mobile-visual {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .hero-grid {
     gap: 32px;
   }
 
-  .hero-title {
-    font-size: 2.5rem;
-    line-height: 1.15;
-    margin-bottom: 20px;
+  /* Simplified mobile text - hide description */
+  .hero-badge {
+    display: none;
   }
 
-  .hero-description {
-    font-size: 1.05rem;
-    margin-bottom: 28px;
+  .mobile-hidden {
+    display: none !important;
+  }
+
+  /* Mobile hero description above animation */
+  .mobile-hero-description {
+    display: block;
+    font-size: 0.88rem;
     line-height: 1.6;
+    color: var(--text);
+    text-align: center;
+    margin: 0 auto 28px;
+    padding: 14px 20px;
+    max-width: 340px;
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
   }
 
-  .hero-badge {
-    font-size: 0.8rem;
-    padding: 6px 14px;
-    margin-bottom: 20px;
-  }
-
-  .hero-buttons {
-    gap: 12px;
-    margin-bottom: 36px;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    padding: 14px 28px;
-    font-size: 0.95rem;
-  }
-
-  .hero-stats {
-    gap: 20px;
-  }
-
-  .stat-number {
-    font-size: 1.35rem;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-  }
-
-  .phone-frame {
-    width: 220px;
-    height: 460px;
-  }
-
-  .phone-screen {
-    padding: 50px 14px 14px;
-  }
-
-  .app-title {
-    font-size: 1.1rem;
-  }
-
-  .user-card {
-    padding: 10px;
-  }
-
-  .user-avatar {
-    width: 38px;
-    height: 38px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    padding: 100px 0 40px;
-  }
-
-  .hero-grid {
-    gap: 28px;
-  }
-
-  .hero-badge {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    margin-bottom: 16px;
-  }
-
-  .hero-badge svg {
-    width: 12px;
-    height: 12px;
+  .mobile-visual {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .hero-title {
-    font-size: 2rem;
-    margin-bottom: 16px;
+    font-size: 1.8rem;
     line-height: 1.2;
-  }
-
-  .hero-description {
-    font-size: 0.95rem;
-    margin-bottom: 24px;
-    line-height: 1.6;
-    padding: 0 8px;
+    margin-bottom: 12px;
+    margin-top: 0;
   }
 
   .hero-buttons {
     flex-direction: column;
     width: 100%;
     gap: 10px;
-    margin-bottom: 32px;
-    padding: 0 8px;
+    margin-bottom: 0;
+    margin-top: 8px;
+    max-width: 280px;
   }
 
   .btn-primary,
@@ -565,85 +513,262 @@
   }
 
   .hero-stats {
-    flex-wrap: wrap;
-    gap: 16px;
-    width: 100%;
-    justify-content: space-around;
-  }
-
-  .stat {
-    min-width: 80px;
-  }
-
-  .stat-number {
-    font-size: 1.25rem;
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
-  }
-
-  .stat-divider {
     display: none;
   }
 
-  .phone-frame {
-    width: 180px;
-    height: 380px;
-    padding: 10px;
+  /* 3D People Animation Styles */
+  .people-animation-container {
+    width: 100%;
+    max-width: 340px;
+    height: 300px;
+    position: relative;
+    perspective: 800px;
+    margin: 0 auto 40px auto;
   }
 
-  .phone-notch {
-    width: 100px;
-    height: 24px;
-    top: 18px;
+  .animation-platform {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
   }
 
-  .phone-screen {
-    padding: 45px 12px 12px;
-    border-radius: 28px;
+  /* Connection SVG lines */
+  .connection-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
   }
 
-  .app-header {
-    margin-bottom: 16px;
+  /* Scanning rings */
+  .scan-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    z-index: 2;
   }
 
-  .app-title {
-    font-size: 1rem;
+  .scan-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 50%;
   }
 
-  .scan-indicator {
+  /* Ground plane */
+  .ground-plane {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, 0) rotateX(75deg);
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(ellipse at center, 
+      rgba(139, 92, 246, 0.12) 0%, 
+      rgba(139, 92, 246, 0.04) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  /* Person 3D styles */
+  .person-3d {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-style: preserve-3d;
+  }
+
+  .center-person {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  .nearby-person {
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
+
+  /* Connection lines from center to nearby people */
+  .connection-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  /* Person body parts */
+  .person-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-style: preserve-3d;
+  }
+
+  .person-body.small {
+    transform: scale(0.7);
+  }
+
+  .person-head {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(145deg, #ffd5b8 0%, #e8b896 100%);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 
+      inset -3px -3px 6px rgba(0,0,0,0.1),
+      0 4px 8px rgba(0,0,0,0.2);
+    z-index: 2;
+  }
+
+  .center-person .person-head {
+    width: 36px;
+    height: 36px;
+  }
+
+  .person-face {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 30%;
+  }
+
+  .person-face::before,
+  .person-face::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #333;
+    border-radius: 50%;
+    top: 0;
+  }
+
+  .person-face::before {
+    left: 15%;
+  }
+
+  .person-face::after {
+    right: 15%;
+  }
+
+  .person-torso {
+    width: 32px;
+    height: 38px;
+    background: linear-gradient(145deg, #8B5CF6 0%, #7C3AED 100%);
+    border-radius: 8px 8px 4px 4px;
+    margin-top: -4px;
+    position: relative;
+    box-shadow: 
+      inset -4px -4px 8px rgba(0,0,0,0.2),
+      0 4px 8px rgba(0,0,0,0.15);
+  }
+
+  .center-person .person-torso {
+    width: 40px;
+    height: 46px;
+  }
+
+  .nearby-person .person-torso {
+    background: linear-gradient(145deg, var(--person-color, #8B5CF6) 0%, color-mix(in srgb, var(--person-color, #8B5CF6) 80%, black) 100%);
+  }
+
+  .person-arms {
+    position: absolute;
+    top: 40px;
+    width: 70px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .center-person .person-arms {
+    top: 50px;
+    width: 85px;
+  }
+
+  .person-arm {
     width: 10px;
-    height: 10px;
+    height: 30px;
+    background: linear-gradient(145deg, #8B5CF6 0%, #7C3AED 100%);
+    border-radius: 5px;
+    transform-origin: top center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
   }
 
-  .user-list {
-    gap: 10px;
+  .center-person .person-arm {
+    width: 12px;
+    height: 36px;
   }
 
-  .user-card {
-    padding: 8px;
-    border-radius: 12px;
+  .person-legs {
+    display: flex;
+    gap: 4px;
+    margin-top: -2px;
   }
 
-  .user-avatar {
-    width: 34px;
-    height: 34px;
-    font-size: 0.9rem;
-    border-radius: 10px;
+  .person-leg {
+    width: 12px;
+    height: 32px;
+    background: linear-gradient(145deg, #374151 0%, #1F2937 100%);
+    border-radius: 4px 4px 6px 6px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   }
 
-  .user-name {
-    font-size: 0.85rem;
+  .center-person .person-leg {
+    width: 15px;
+    height: 40px;
   }
 
-  .user-distance {
+  /* Bluetooth indicator */
+  .bluetooth-indicator {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 
+      0 0 20px rgba(59, 130, 246, 0.6),
+      0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .person-label {
+    position: absolute;
+    bottom: -22px;
     font-size: 0.7rem;
-  }
-
-  .proximity-indicator .dot {
-    width: 3px;
-    height: 10px;
+    font-weight: 600;
+    color: var(--text);
+    background: rgba(139, 92, 246, 0.25);
+    padding: 3px 12px;
+    border-radius: 10px;
+    white-space: nowrap;
   }
 
   .scroll-indicator {
@@ -655,28 +780,197 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
+  .hero {
+    padding: 90px 0 40px;
+  }
+
   .hero-title {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
+    margin-top: 0;
   }
 
-  .hero-description {
-    font-size: 0.9rem;
+  .people-animation-container {
+    max-width: 300px;
+    height: 260px;
+    margin-bottom: 32px;
   }
 
-  .phone-frame {
-    width: 160px;
-    height: 340px;
+  .ground-plane {
+    width: 200px;
+    height: 200px;
   }
 
-  .user-card {
-    padding: 6px;
-    gap: 8px;
-  }
-
-  .user-avatar {
+  .center-person .person-head {
     width: 30px;
     height: 30px;
-    font-size: 0.8rem;
+  }
+
+  .center-person .person-torso {
+    width: 34px;
+    height: 38px;
+  }
+
+  .center-person .person-arms {
+    top: 42px;
+    width: 70px;
+  }
+
+  .center-person .person-arm {
+    width: 10px;
+    height: 28px;
+  }
+
+  .center-person .person-leg {
+    width: 12px;
+    height: 32px;
+  }
+
+  .bluetooth-indicator {
+    width: 28px;
+    height: 28px;
+    top: -30px;
+  }
+
+  .bluetooth-indicator svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.4rem;
+    margin-top: 0;
+  }
+
+  .people-animation-container {
+    max-width: 260px;
+    height: 230px;
+    margin-bottom: 28px;
+  }
+}
+
+/* ===== 3D People Animation Keyframes ===== */
+
+/* Scan ring expanding animation */
+@keyframes scanPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* Arm waving animation for center person */
+@keyframes waveArm {
+  0%, 100% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+}
+
+@keyframes waveArmRight {
+  0%, 100% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+}
+
+/* Bluetooth glow pulse */
+@keyframes bluetoothGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(59, 130, 246, 0.6),
+      0 4px 12px rgba(0,0,0,0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 35px rgba(59, 130, 246, 0.9),
+      0 0 60px rgba(59, 130, 246, 0.4),
+      0 4px 12px rgba(0,0,0,0.3);
+  }
+}
+
+/* Connection line dash animation */
+@keyframes dashFlow {
+  0% {
+    stroke-dashoffset: 20;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Person floating/bobbing */
+@keyframes personFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-5px);
+  }
+}
+
+/* Connection pulse animation */
+@keyframes connectionPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Apply animations within media query */
+@media (max-width: 768px) {
+  .scan-ring {
+    animation: scanPulse 2.5s ease-out infinite;
+  }
+
+  .scan-ring:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .scan-ring:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .scan-ring:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  .center-person .person-arm.left {
+    animation: waveArm 1.5s ease-in-out infinite;
+  }
+
+  .center-person .person-arm.right {
+    animation: waveArmRight 1.5s ease-in-out infinite;
+  }
+
+  .bluetooth-indicator {
+    animation: bluetoothGlow 2s ease-in-out infinite;
+  }
+
+  .connection-line path {
+    stroke-dasharray: 8 4;
+    animation: dashFlow 1s linear infinite;
+  }
+
+  .nearby-person {
+    animation: personFloat 3s ease-in-out infinite;
+  }
+
+  .connection-pulse {
+    animation: connectionPulse 2s ease-out infinite;
   }
 }

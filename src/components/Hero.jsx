@@ -1,18 +1,8 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Bluetooth, Users, Sparkles, ArrowRight, Download } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   const handleDownload = () => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     const isAndroid = /android/i.test(userAgent);
@@ -33,8 +23,17 @@ const Hero = () => {
     { Icon: Sparkles, delay: 0.4, x: -100, y: 80 },
   ];
 
+  // Nearby people positions for the 3D animation - evenly distributed
+  const nearbyPeople = [
+    { id: 1, angle: -90, distance: 110, delay: 0.5, color: '#8B5CF6' },   // Top
+    { id: 2, angle: -35, distance: 105, delay: 0.7, color: '#06B6D4' },   // Top-right
+    { id: 3, angle: 35, distance: 110, delay: 0.9, color: '#F472B6' },    // Bottom-right
+    { id: 4, angle: 145, distance: 105, delay: 1.1, color: '#10B981' },   // Bottom-left
+    { id: 5, angle: -145, distance: 110, delay: 1.3, color: '#F59E0B' },  // Top-left
+  ];
+
   return (
-    <section className="hero" ref={ref}>
+    <section className="hero">
       {/* Background Elements */}
       <div className="hero-bg">
         <motion.div 
@@ -64,7 +63,7 @@ const Hero = () => {
         <div className="grid-overlay" />
       </div>
 
-      <motion.div className="hero-content" style={{ y, opacity }}>
+      <div className="hero-content">
         <div className="container">
           <div className="hero-grid">
             <div className="hero-text">
@@ -90,7 +89,7 @@ const Hero = () => {
               </motion.h1>
 
               <motion.p
-                className="hero-description"
+                className="hero-description mobile-hidden"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -149,7 +148,8 @@ const Hero = () => {
               </motion.div>
             </div>
 
-            <div className="hero-visual">
+            {/* Desktop Visual - Phone Mockup */}
+            <div className="hero-visual desktop-visual">
               <motion.div
                 className="phone-mockup"
                 initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
@@ -239,9 +239,156 @@ const Hero = () => {
                 </div>
               </motion.div>
             </div>
+
+            {/* Mobile Visual - 3D People Animation */}
+            <div className="hero-visual mobile-visual">
+              <motion.p 
+                className="mobile-hero-description"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+              >
+                Connect locally and globally through secure, privacy-first social networking.
+              </motion.p>
+              
+              <div className="people-animation-container">
+                {/* 3D Platform */}
+                <div className="animation-platform">
+                  {/* Curved connection lines from center to nearby people */}
+                  <svg className="connection-svg" viewBox="0 0 340 300">
+                    {nearbyPeople.map((person) => {
+                      const centerX = 170;
+                      const centerY = 140;
+                      const endX = centerX + Math.cos((person.angle * Math.PI) / 180) * person.distance;
+                      const endY = centerY + Math.sin((person.angle * Math.PI) / 180) * person.distance * 0.6;
+                      
+                      // Create curved projectile path with control point
+                      const midX = (centerX + endX) / 2;
+                      const midY = (centerY + endY) / 2 - 35; // Arc upward
+                      
+                      return (
+                        <motion.path
+                          key={`line-${person.id}`}
+                          d={`M ${centerX} ${centerY} Q ${midX} ${midY} ${endX} ${endY}`}
+                          stroke={person.color}
+                          strokeWidth="2.5"
+                          fill="none"
+                          strokeLinecap="round"
+                          initial={{ pathLength: 0, opacity: 0 }}
+                          animate={{ pathLength: 1, opacity: 0.7 }}
+                          transition={{ 
+                            pathLength: { duration: 1, delay: person.delay },
+                            opacity: { duration: 0.5, delay: person.delay }
+                          }}
+                        />
+                      );
+                    })}
+                  </svg>
+
+                  {/* Scanning rings */}
+                  <div className="scan-rings">
+                    {[1, 2, 3].map((ring) => (
+                      <motion.div
+                        key={ring}
+                        className="scan-ring"
+                        initial={{ scale: 0, opacity: 0.8 }}
+                        animate={{ 
+                          scale: [0, 2.5], 
+                          opacity: [0.6, 0] 
+                        }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          delay: ring * 0.6,
+                          ease: 'easeOut',
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Center Person (You) */}
+                  <motion.div 
+                    className="person-3d center-person"
+                    initial={{ scale: 0, y: 20 }}
+                    animate={{ scale: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    <div className="person-body">
+                      <div className="person-head">
+                        <div className="person-face"></div>
+                      </div>
+                      <div className="person-torso"></div>
+                      <div className="person-arms">
+                        <motion.div 
+                          className="person-arm left"
+                          animate={{ rotate: [0, 10, 0] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
+                        <motion.div 
+                          className="person-arm right"
+                          animate={{ rotate: [0, -10, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                        />
+                      </div>
+                      <div className="person-legs">
+                        <div className="person-leg left" />
+                        <div className="person-leg right" />
+                      </div>
+                    </div>
+                    {/* Bluetooth Icon above head */}
+                    <motion.div 
+                      className="bluetooth-indicator"
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ 
+                        opacity: 1, 
+                        scale: [1, 1.15, 1]
+                      }}
+                      transition={{ duration: 1.5, delay: 0.5, repeat: Infinity }}
+                    >
+                      <Bluetooth size={18} />
+                    </motion.div>
+                    <span className="person-label">You</span>
+                  </motion.div>
+
+                  {/* Nearby People */}
+                  {nearbyPeople.map((person) => {
+                    const x = Math.cos((person.angle * Math.PI) / 180) * person.distance;
+                    const y = Math.sin((person.angle * Math.PI) / 180) * person.distance * 0.6;
+                    
+                    return (
+                      <motion.div
+                        key={person.id}
+                        className="person-3d nearby-person"
+                        style={{
+                          left: `calc(50% + ${x}px)`,
+                          top: `calc(47% + ${y}px)`,
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: person.delay + 0.3 }}
+                      >
+                        <div className="person-body small" style={{ '--person-color': person.color }}>
+                          <div className="person-head">
+                            <div className="person-face"></div>
+                          </div>
+                          <div className="person-torso"></div>
+                          <div className="person-legs">
+                            <div className="person-leg left" />
+                            <div className="person-leg right" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+
+                  {/* Ground shadow */}
+                  <div className="ground-plane"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div
