@@ -420,33 +420,167 @@
   }
 }
 
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 120px 0 60px;
+  }
+
+  .orb-1 {
+    width: 400px;
+    height: 400px;
+    top: -10%;
+    left: -30%;
+  }
+
+  .orb-2 {
+    width: 350px;
+    height: 350px;
+    top: 20%;
+    right: -30%;
+  }
+
+  .orb-3 {
+    width: 300px;
+    height: 300px;
+    bottom: 0%;
+    left: 10%;
+  }
+
+  .hero-grid {
+    gap: 32px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero-description {
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .hero-badge {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    margin-bottom: 20px;
+  }
+
+  .hero-buttons {
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 14px 28px;
+    font-size: 0.95rem;
+  }
+
+  .hero-stats {
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 1.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .phone-frame {
+    width: 220px;
+    height: 460px;
+  }
+
+  .phone-screen {
+    padding: 50px 14px 14px;
+  }
+
+  .app-title {
+    font-size: 1.1rem;
+  }
+
+  .user-card {
+    padding: 10px;
+  }
+
+  .user-avatar {
+    width: 38px;
+    height: 38px;
+  }
+}
+
 @media (max-width: 480px) {
   .hero {
-    padding-top: 100px;
+    padding: 100px 0 40px;
+  }
+
+  .hero-grid {
+    gap: 28px;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    margin-bottom: 16px;
+  }
+
+  .hero-badge svg {
+    width: 12px;
+    height: 12px;
   }
 
   .hero-title {
     font-size: 2rem;
+    margin-bottom: 16px;
+    line-height: 1.2;
   }
 
   .hero-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+    padding: 0 8px;
   }
 
   .hero-buttons {
     flex-direction: column;
     width: 100%;
+    gap: 10px;
+    margin-bottom: 32px;
+    padding: 0 8px;
   }
 
   .btn-primary,
   .btn-secondary {
     width: 100%;
     justify-content: center;
+    padding: 14px 24px;
+    font-size: 0.9rem;
   }
 
   .hero-stats {
     flex-wrap: wrap;
     gap: 16px;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .stat {
+    min-width: 80px;
+  }
+
+  .stat-number {
+    font-size: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
   }
 
   .stat-divider {
@@ -454,11 +588,95 @@
   }
 
   .phone-frame {
-    width: 200px;
-    height: 420px;
+    width: 180px;
+    height: 380px;
+    padding: 10px;
+  }
+
+  .phone-notch {
+    width: 100px;
+    height: 24px;
+    top: 18px;
+  }
+
+  .phone-screen {
+    padding: 45px 12px 12px;
+    border-radius: 28px;
+  }
+
+  .app-header {
+    margin-bottom: 16px;
+  }
+
+  .app-title {
+    font-size: 1rem;
+  }
+
+  .scan-indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .user-list {
+    gap: 10px;
+  }
+
+  .user-card {
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .user-name {
+    font-size: 0.85rem;
+  }
+
+  .user-distance {
+    font-size: 0.7rem;
+  }
+
+  .proximity-indicator .dot {
+    width: 3px;
+    height: 10px;
   }
 
   .scroll-indicator {
     display: none;
+  }
+
+  .radar-rings {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+  }
+
+  .phone-frame {
+    width: 160px;
+    height: 340px;
+  }
+
+  .user-card {
+    padding: 6px;
+    gap: 8px;
+  }
+
+  .user-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
   }
 }

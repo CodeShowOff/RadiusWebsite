@@ -43,40 +43,40 @@ const WhyRadius = () => {
   const stats = [
     { value: 100, suffix: '%', label: 'Privacy Protected' },
     { value: 0, suffix: '', label: 'Location Tracking' },
-    { value: 10, suffix: 'm', label: 'Discovery Range' },
-    { value: 24, suffix: '/7', label: 'Works Offline' },
+    { value: 9, suffix: '+', label: 'Core Features' },
+    { value: 3, suffix: '', label: 'Group Types' },
   ];
 
   const benefits = [
     {
       icon: Shield,
-      title: 'No GPS Required',
-      description: 'Uses Bluetooth only. Your location is never tracked or stored.',
+      title: 'Privacy First',
+      description: 'No GPS tracking. Bluetooth for proximity, internet for groups. You control your visibility.',
     },
     {
-      icon: Eye,
-      title: 'You\'re in Control',
-      description: 'Decide when to be discoverable. Turn off anytime, instantly disappear.',
+      icon: Globe,
+      title: 'Multiple Discovery Modes',
+      description: 'Find people nearby, join global interest groups, or create location-based communities.',
     },
     {
       icon: Lock,
       title: 'Mutual Consent',
-      description: 'Both users must accept. No unwanted messages or spam.',
+      description: 'All connections require acceptance. Groups have admin approval. No spam.',
     },
     {
       icon: Zap,
-      title: 'Instant Discovery',
-      description: 'Find nearby users in seconds. Real-time proximity detection.',
-    },
-    {
-      icon: Globe,
-      title: 'Works Anywhere',
-      description: 'Coffee shops, events, campus — anywhere people gather.',
+      title: 'Full-Featured Messaging',
+      description: 'Texts, voice messages, photos, stickers, and documents. Everything you need to communicate.',
     },
     {
       icon: Heart,
-      title: 'Genuine Connections',
-      description: 'Meet people you\'re actually near. No fake profiles, no catfishing.',
+      title: 'Community Focused',
+      description: 'Help nearby users, join group discussions, play games. Build real relationships.',
+    },
+    {
+      icon: Eye,
+      title: 'Flexible & Fun',
+      description: 'Serious groups or casual chats. Anonymous games or direct connections. Your choice.',
     },
   ];
 
@@ -115,11 +115,11 @@ const WhyRadius = () => {
         >
           <span className="section-label">Why Radius</span>
           <h2 className="section-title">
-            Built for <span className="gradient-text">real connections</span>
+            A complete <span className="gradient-text">social experience</span>
           </h2>
           <p className="section-description">
-            Unlike traditional social apps, Radius focuses on what matters: 
-            genuine, in-person connections without compromising your privacy.
+            Radius combines proximity discovery, group communities, rich messaging, 
+            and helpful features — all while keeping your privacy intact.
           </p>
         </motion.div>
 

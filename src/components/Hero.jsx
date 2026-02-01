@@ -74,8 +74,8 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <Bluetooth size={14} />
-                <span>Proximity-Based Social Connection</span>
+                <Users size={14} />
+                <span>Connect, Chat & Build Community</span>
               </motion.div>
 
               <motion.h1
@@ -84,9 +84,9 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Meet People
+                Your Social Hub
                 <br />
-                <span className="gradient-text">Around You</span>
+                <span className="gradient-text">For Real Connections</span>
               </motion.h1>
 
               <motion.p
@@ -95,9 +95,9 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Discover and connect with people nearby using Bluetooth. 
-                No location tracking, no algorithms — just real, spontaneous 
-                connections in the moment.
+                Discover people nearby, join group discussions worldwide, 
+                help your community, and chat with rich media. Privacy-first 
+                social networking without the tracking.
               </motion.p>
 
               <motion.div
@@ -138,13 +138,13 @@ const Hero = () => {
                 </div>
                 <div className="stat-divider" />
                 <div className="stat">
-                  <span className="stat-number">0</span>
-                  <span className="stat-label">Location Tracking</span>
+                  <span className="stat-number">Rich</span>
+                  <span className="stat-label">Media Messaging</span>
                 </div>
                 <div className="stat-divider" />
                 <div className="stat">
-                  <span className="stat-number">∞</span>
-                  <span className="stat-label">Connections</span>
+                  <span className="stat-number">Groups</span>
+                  <span className="stat-label">Nearby & Global</span>
                 </div>
               </motion.div>
             </div>

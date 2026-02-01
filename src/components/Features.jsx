@@ -119,12 +119,12 @@ const Features = () => {
         >
           <span className="section-label">Features</span>
           <h2 className="section-title">
-            Everything you need to
-            <span className="gradient-text"> connect nearby</span>
+            Everything you need for
+            <span className="gradient-text"> meaningful connections</span>
           </h2>
           <p className="section-description">
-            Radius combines powerful features with simplicity, giving you the tools
-            to discover and build meaningful connections with people around you.
+            From nearby discovery to global communities, from one-on-one chats to group discussions,
+            Radius offers a complete social experience that respects your privacy.
           </p>
         </motion.div>
 
