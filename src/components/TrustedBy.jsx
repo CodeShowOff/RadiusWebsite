@@ -15,7 +15,7 @@ const TrustedBy = () => {
   ];
 
   return (
-    <section className="trusted-section" ref={ref}>
+    <section className="trusted-section" ref={ref} aria-label="Radius app featured in press">
       <div className="container">
         <motion.p
           className="trusted-label"
@@ -23,7 +23,7 @@ const TrustedBy = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
         >
-          Featured in
+          Radius App Featured in
         </motion.p>
         
         <motion.div
@@ -31,6 +31,8 @@ const TrustedBy = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
+          role="list"
+          aria-label="Media outlets featuring Radius"
         >
           {logos.map((logo, index) => (
             <motion.div
@@ -40,6 +42,7 @@ const TrustedBy = () => {
               animate={isInView ? { opacity: logo.opacity } : {}}
               transition={{ delay: 0.2 + index * 0.1 }}
               whileHover={{ opacity: 1 }}
+              role="listitem"
             >
               <span className="logo-text">{logo.name}</span>
             </motion.div>

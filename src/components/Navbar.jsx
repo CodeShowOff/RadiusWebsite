@@ -16,10 +16,10 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'How It Works', href: '#how-it-works' },
+    { name: 'Radius Features', href: '#features' },
+    { name: 'How Radius Works', href: '#how-it-works' },
     { name: 'Why Radius', href: '#why-radius' },
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Radius FAQ', href: '#faq' },
   ];
 
   const handleDownload = () => {
@@ -29,7 +29,8 @@ const Navbar = () => {
     const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
     
     if (isAndroid) {
-      window.location.href = 'https://play.google.com/store/apps/details?id=com.radius.app';
+      // Direct APK download for Android users
+      window.location.href = '/Radius.apk';
     } else if (isIOS) {
       window.location.href = 'https://apps.apple.com/app/radius/id123456789';
     } else {
@@ -39,26 +40,27 @@ const Navbar = () => {
 
   return (
     <>
-      <motion.nav
+      <motion.header
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
+        role="banner"
       >
-        <div className="navbar-container">
+        <nav className="navbar-container" aria-label="Main navigation">
           <motion.a 
             href="#" 
             className="navbar-logo"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="Radius - Home"
+            title="Radius App - Meet People Around You"
           >
-            <div className="logo-icon">
-              <Radio size={24} />
-            </div>
+            <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" />
             <span>Radius</span>
           </motion.a>
 
-          <div className="navbar-links">
+          <div className="navbar-links" role="menubar">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -68,6 +70,7 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
                 whileHover={{ y: -2 }}
+                role="menuitem"
               >
                 {link.name}
               </motion.a>
@@ -82,27 +85,31 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
+            aria-label="Download Radius App"
           >
-            Get App
+            Get Radius
           </motion.button>
 
           <button
             className="mobile-menu-btn"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
-        </div>
-      </motion.nav>
+        </nav>
+      </motion.header>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
+          <motion.nav
             className="mobile-menu"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
+            aria-label="Mobile navigation"
           >
             {navLinks.map((link, index) => (
               <motion.a
@@ -123,10 +130,11 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
+              aria-label="Download Radius App"
             >
-              Download App
+              Download Radius
             </motion.button>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </>

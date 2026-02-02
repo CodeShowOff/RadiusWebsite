@@ -1,0 +1,26 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Radius Connect - News & Updates",
+  "home_page_url": "https://radiusconnect.tech",
+  "feed_url": "https://radiusconnect.tech/feed.json",
+  "description": "Latest news and updates from Radius Connect - the privacy-first social discovery app and social media platform",
+  "icon": "https://radiusconnect.tech/logo.png",
+  "favicon": "https://radiusconnect.tech/favicon.svg",
+  "authors": [
+    {
+      "name": "Radius Connect Team",
+      "url": "https://radiusconnect.tech"
+    }
+  ],
+  "language": "en",
+  "items": [
+    {
+      "id": "radius-connect-launch-2026",
+      "url": "https://radiusconnect.tech/#download",
+      "title": "Radius Connect App Launches - Social Discovery Reimagined",
+      "content_text": "Radius Connect is now available on iOS and Android! Connect with people nearby, join group chatrooms, play the Guess Me game, chat with rich media, and help your community. Download now for free.",
+      "date_published": "2026-02-03T00:00:00Z",
+      "tags": ["launch", "radius", "radius connect", "social app", "social media", "social network"]
+    }
+  ]
+}

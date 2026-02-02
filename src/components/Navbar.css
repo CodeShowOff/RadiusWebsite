@@ -39,12 +39,8 @@
 .logo-icon {
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gradient-1);
   border-radius: 12px;
-  color: white;
+  object-fit: contain;
 }
 
 .navbar-links {

@@ -14,18 +14,30 @@ const DownloadSection = () => {
     const isMobile = isAndroid || isIOS;
 
     if (platform === 'android' || (platform === 'auto' && isAndroid)) {
-      window.location.href = 'https://play.google.com/store/apps/details?id=com.radius.app';
+      // Direct APK download for Android
+      window.location.href = '/Radius.apk';
+    } else if (platform === 'apk') {
+      // Direct APK download
+      window.location.href = '/Radius.apk';
     } else if (platform === 'ios' || (platform === 'auto' && isIOS)) {
       window.location.href = 'https://apps.apple.com/app/radius/id123456789';
     } else if (platform === 'auto' && !isMobile) {
-      // Show QR code or scroll to store links
-      alert('Scan the QR code with your phone to download Radius!');
+      // For desktop users, scroll to show all options
+      window.scrollBy({ top: 200, behavior: 'smooth' });
     }
   };
 
   return (
-    <section id="download" className="download-section" ref={ref}>
-      <div className="download-bg">
+    <section id="download" className="download-section" ref={ref} aria-labelledby="download-title" itemScope itemType="https://schema.org/SoftwareApplication">
+      <meta itemProp="name" content="Radius" />
+      <meta itemProp="applicationCategory" content="SocialNetworkingApplication" />
+      <meta itemProp="operatingSystem" content="iOS, Android" />
+      <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
+        <meta itemProp="price" content="0" />
+        <meta itemProp="priceCurrency" content="USD" />
+      </div>
+      
+      <div className="download-bg" aria-hidden="true">
         <div className="download-gradient-1" />
         <div className="download-gradient-2" />
         <div className="download-grid-overlay" />
@@ -44,93 +56,91 @@ const DownloadSection = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.1 }}
           >
-            <Smartphone size={16} />
-            <span>Available on iOS & Android</span>
+            <Smartphone size={16} aria-hidden="true" />
+            <span>Radius Available on iOS & Android</span>
           </motion.div>
 
-          <h2 className="download-title">
+          <h2 id="download-title" className="download-title">
             Ready to meet people
             <br />
-            <span className="gradient-text">around you?</span>
+            <span className="gradient-text">around you with Radius?</span>
           </h2>
 
-          <p className="download-description">
-            Download Radius now and start discovering genuine connections 
-            in your vicinity. It's free, private, and takes seconds to set up.
+          <p className="download-description" itemProp="description">
+            <strong>Download Radius</strong> now and start discovering genuine connections 
+            in your vicinity. <strong>Radius is free</strong>, private, and takes seconds to set up.
+            The best <strong>social discovery app</strong> for meeting people nearby.
           </p>
 
-          <div className="download-buttons">
-            <motion.button
-              className="download-btn primary"
-              onClick={() => handleDownload('auto')}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 50px rgba(139, 92, 246, 0.5)' }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 }}
-            >
-              <Download size={22} />
-              <div className="btn-text">
-                <span className="btn-label">Download Now</span>
-                <span className="btn-sublabel">Free on your device</span>
-              </div>
-            </motion.button>
-          </div>
-
           <div className="store-buttons">
-            <motion.a
-              href="https://apps.apple.com/app/radius/id123456789"
-              className="store-btn"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.div
+              className="store-btn coming-soon"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3 }}
-              target="_blank"
-              rel="noopener noreferrer"
+              aria-label="Radius App Store - Coming Soon"
             >
-              <Apple size={28} />
+              <Apple size={28} aria-hidden="true" />
               <div className="store-text">
-                <span>Download on the</span>
+                <span>Download Radius on the</span>
                 <strong>App Store</strong>
               </div>
-            </motion.a>
+              <span className="coming-soon-badge">Coming Soon</span>
+            </motion.div>
 
-            <motion.a
-              href="https://play.google.com/store/apps/details?id=com.radius.app"
-              className="store-btn"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.div
+              className="store-btn coming-soon"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4 }}
-              target="_blank"
-              rel="noopener noreferrer"
+              aria-label="Radius Google Play - Coming Soon"
             >
-              <Play size={28} fill="currentColor" />
+              <Play size={28} fill="currentColor" aria-hidden="true" />
               <div className="store-text">
-                <span>Get it on</span>
+                <span>Get Radius on</span>
                 <strong>Google Play</strong>
               </div>
-            </motion.a>
+              <span className="coming-soon-badge">Coming Soon</span>
+            </motion.div>
           </div>
+
+          <motion.div
+            className="direct-apk-section"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.5 }}
+          >
+            <p className="download-divider">
+              <span>or download APK directly</span>
+            </p>
+            <motion.button
+              onClick={() => handleDownload('apk')}
+              className="apk-download-btn"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Download Radius APK file directly"
+            >
+              <Download size={20} aria-hidden="true" />
+              <span>Download APK (Android)</span>
+            </motion.button>
+          </motion.div>
 
           <motion.div
             className="qr-section"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.6 }}
           >
             <div className="qr-divider">
               <span>or scan to download</span>
             </div>
-            <div className="qr-code">
+            <div className="qr-code coming-soon-qr">
               <QrCode size={100} strokeWidth={1} />
               <div className="qr-overlay">
-                <span>📱</span>
+                <span className="qr-coming-soon-text">Coming Soon</span>
               </div>
             </div>
-            <p className="qr-hint">Point your phone camera at the QR code</p>
+            <p className="qr-hint">QR code will be available soon</p>
           </motion.div>
         </motion.div>
 

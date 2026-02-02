@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Radius App - News & Updates</title>
+    <description>Latest news, updates, and features from Radius - the privacy-first social discovery app for meeting people nearby using Bluetooth technology.</description>
+    <link>https://radiusconnect.tech</link>
+    <atom:link href="https://radiusconnect.tech/rss.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Feb 2026 00:00:00 GMT</lastBuildDate>
+    <pubDate>Mon, 03 Feb 2026 00:00:00 GMT</pubDate>
+    <managingEditor>hello@radius.app (Radius Team)</managingEditor>
+    <webMaster>support@radius.app (Radius Support)</webMaster>
+    <category>Technology</category>
+    <category>Social Networking</category>
+    <category>Mobile Apps</category>
+    <ttl>1440</ttl>
+    <image>
+      <url>https://radiusconnect.tech/logo.png</url>
+      <title>Radius App</title>
+      <link>https://radiusconnect.tech</link>
+      <width>144</width>
+      <height>144</height>
+    </image>
+    
+    <item>
+      <title>Radius Connect App Launch - Social Discovery Reimagined</title>
+      <description>Radius Connect is now available on iOS and Android! Connect with people nearby, join group chatrooms, play the Guess Me game, chat with rich media, and help your community. Download now for free - privacy-first social networking without tracking.</description>
+      <link>https://radiusconnect.tech/#download</link>
+      <guid isPermaLink="true">https://radiusconnect.tech/#download</guid>
+      <pubDate>Mon, 03 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Launch</category>
+      <category>Radius Connect</category>
+      <content:encoded><![CDATA[
+        <h2>Introducing Radius Connect - The Privacy-First Social Discovery App</h2>
+        <p>We're thrilled to announce the launch of <strong>Radius Connect</strong>, a revolutionary social discovery app and social media platform that helps you connect with people nearby and build meaningful communities.</p>
+        <h3>Key Features of Radius Connect:</h3>
+        <ul>
+          <li><strong>Proximity Discovery</strong> - Find and connect with people nearby</li>
+          <li><strong>Guess Me Game</strong> - Anonymous icebreaker conversations with nearby users</li>
+          <li><strong>Rich Messaging</strong> - Send texts, voice messages, photos, stickers, and documents</li>
+          <li><strong>Random Group Chatrooms</strong> - Join global topic-based groups</li>
+          <li><strong>Nearby Groups</strong> - Create temporary Bluetooth-based groups for events</li>
+          <li><strong>Nearby Help</strong> - Request or provide assistance to people in your vicinity</li>
+          <li><strong>100% Privacy</strong> - No location tracking, no data selling</li>
+        </ul>
+        <p><a href="https://radiusconnect.tech/#download">Download Radius free</a> on iOS and Android today!</p>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Why Radius Uses Bluetooth Instead of GPS for Social Discovery</title>
+      <description>Learn why Radius chose Bluetooth Low Energy technology for proximity detection instead of GPS. Privacy, accuracy, and genuine in-person connections are at the heart of our approach.</description>
+      <link>https://radiusconnect.tech/#features</link>
+      <guid isPermaLink="true">https://radiusconnect.tech/#features</guid>
+      <pubDate>Mon, 03 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Technology</category>
+      <category>Privacy</category>
+    </item>
+    
+    <item>
+      <title>Radius Guess Me Game - The Fun Way to Meet New People</title>
+      <description>Discover how the Radius Guess Me game works. Start anonymous conversations with nearby users, try to guess each other's identity, and make genuine connections.</description>
+      <link>https://radiusconnect.tech/#how-it-works</link>
+      <guid isPermaLink="true">https://radiusconnect.tech/#how-it-works</guid>
+      <pubDate>Mon, 03 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Features</category>
+      <category>Games</category>
+    </item>
+  </channel>
+</rss>

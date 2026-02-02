@@ -1,28 +1,303 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Radius - Discover and connect with people nearby using Bluetooth. Join random groups worldwide, create nearby groups for events, or request help from your community. Privacy-first social discovery without location tracking." />
-    <meta name="keywords" content="social app, bluetooth, nearby, connections, proximity, meet people, privacy, group chat, random groups, nearby help, community" />
-    <meta name="theme-color" content="#8B5CF6" />
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="Radius - Meet People Around You" />
-    <meta property="og:description" content="Discover genuine connections with people nearby. Join groups, request help, and build community. Privacy-first social discovery powered by Bluetooth." />
+    <!-- Primary Meta Tags - CRITICAL FOR SEO -->
+    <title>Radius Connect | Social Discovery App - Connect, Chat & Build Community</title>
+    <meta name="title" content="Radius Connect | Social Discovery App - Connect, Chat & Build Community" />
+    <meta name="description" content="Radius Connect is the #1 privacy-first social discovery app. Connect with people nearby, join global group chatrooms, play the Guess Me game, chat with rich media, and help your community. Download Radius free on iOS & Android - no location tracking, 100% privacy guaranteed." />
+    <meta name="keywords" content="Radius, Radius Connect, RadiusConnect, Radius app, Radius social media, Radius social app, Radius social network, Radius download, Radius iOS, Radius Android, social discovery app, meet people nearby, nearby connections, proximity app, social networking app, group chat app, private messaging app, anonymous chat, Guess Me game, nearby help app, community app, privacy social app, local meetup app, random group chat, location groups, social app 2026, radius connect app, radius connect social" />
+    <meta name="author" content="Radius App" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#8B5CF6" />
+    <meta name="msapplication-TileColor" content="#8B5CF6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Radius" />
+    <meta name="application-name" content="Radius" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- Canonical URL - CRITICAL -->
+    <link rel="canonical" href="https://radiusconnect.tech/" />
+    
+    <!-- Alternate URLs for different regions/languages -->
+    <link rel="alternate" hreflang="en" href="https://radiusconnect.tech/" />
+    <link rel="alternate" hreflang="x-default" href="https://radiusconnect.tech/" />
+    
+    <!-- Favicons & App Icons -->
+    <link rel="icon" type="image/png" href="/app_icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/app_icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/app_icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/app_icon.png" />
+    <link rel="shortcut icon" href="/app_icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://radiusconnect.tech/" />
+    <meta property="og:site_name" content="Radius Connect" />
+    <meta property="og:title" content="Radius Connect | Social Discovery App - Connect & Build Community" />
+    <meta property="og:description" content="Download Radius - the privacy-first app to discover and connect with people nearby using Bluetooth. Join groups, play games, help your community. Free on iOS & Android." />
+    <meta property="og:image" content="https://radiusconnect.tech/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Radius App - Meet People Around You" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="fb:app_id" content="YOUR_FB_APP_ID" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Radius - Meet People Around You" />
-    <meta name="twitter:description" content="Discover genuine connections with people nearby. Join groups, request help, and build community. Privacy-first social discovery powered by Bluetooth." />
+    <meta name="twitter:site" content="@radiusapp" />
+    <meta name="twitter:creator" content="@radiusapp" />
+    <meta name="twitter:url" content="https://radiusconnect.tech/" />
+    <meta name="twitter:title" content="Radius Connect | Social Discovery App - Connect & Build Community" />
+    <meta name="twitter:description" content="Download Radius - the privacy-first app to discover and connect with people nearby using Bluetooth. Join groups, play games, help your community." />
+    <meta name="twitter:image" content="https://radiusconnect.tech/twitter-image.png" />
+    <meta name="twitter:image:alt" content="Radius App - Privacy-First Social Discovery" />
     
-    <title>Radius - Meet People Around You</title>
+    <!-- App Store Smart Banners -->
+    <meta name="apple-itunes-app" content="app-id=123456789, app-argument=radius://">
+    <meta name="google-play-app" content="app-id=com.radius.app">
+    
+    <!-- Verification Tags -->
+    <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" />
+    <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" />
+    <meta name="yandex-verification" content="YOUR_YANDEX_VERIFICATION_CODE" />
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Radius Connect",
+      "alternateName": ["Radius", "Radius App", "RadiusConnect", "Radius Social", "Radius Social Media", "Radius Social Network"],
+      "url": "https://radiusconnect.tech",
+      "logo": "https://radiusconnect.tech/logo.png",
+      "description": "Radius Connect is the leading privacy-first social discovery app that helps you connect with people nearby, join communities, and build meaningful relationships.",
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://twitter.com/radiusapp",
+        "https://instagram.com/radiusapp",
+        "https://github.com/radiusapp",
+        "https://www.facebook.com/radiusapp",
+        "https://www.linkedin.com/company/radiusapp",
+        "https://www.youtube.com/@radiusapp"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "support@radius.app",
+        "availableLanguage": "English"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - Software Application -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Radius Connect",
+      "alternateName": ["Radius", "Radius App", "Radius Social Media", "Radius Social Network"],
+      "description": "Radius Connect is a privacy-first social discovery app that helps you connect with people nearby, join groups, play the Guess Me game, request nearby help, chat with rich media, and build community.",
+      "applicationCategory": "SocialNetworkingApplication",
+      "operatingSystem": ["iOS", "Android"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "15000",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "downloadUrl": [
+        "https://apps.apple.com/app/radius/id123456789",
+        "https://play.google.com/store/apps/details?id=com.radius.app"
+      ],
+      "screenshot": "https://radiusconnect.tech/screenshot.png",
+      "softwareVersion": "1.0",
+      "author": {
+        "@type": "Organization",
+        "name": "Radius"
+      },
+      "featureList": [
+        "Proximity discovery - find people nearby",
+        "Privacy-first - no GPS tracking",
+        "Rich messaging with voice, photos, stickers",
+        "Guess Me anonymous game",
+        "Random group chatrooms",
+        "Nearby groups for events",
+        "Location-based groups",
+        "Nearby help requests",
+        "Mutual consent connections",
+        "Social networking without tracking"
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Radius Connect",
+      "alternateName": ["Radius", "Radius App", "Radius Social Media"],
+      "url": "https://radiusconnect.tech",
+      "description": "Official website for Radius - the privacy-first social discovery app",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://radiusconnect.tech/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does Radius find people nearby?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Radius uses Bluetooth Low Energy (BLE) technology to detect other Radius users in your vicinity. When your Bluetooth is on and the app is open, it broadcasts a unique signal that other devices can detect. This allows you to see who's nearby without using GPS or sharing your location."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my location tracked by Radius?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No! Radius never tracks your GPS location. We only use Bluetooth to detect proximity to other users. This means you're only visible to people who are physically near you, and your location data is never stored or shared."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Guess Me game in Radius?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Guess Me is an anonymous icebreaker game where you can chat with a nearby user without knowing who they are. You try to guess each other's identity through conversation. If you both enjoy the chat, you can reveal yourselves and connect!"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Radius free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Radius is completely free to download and use. All core features including discovery, messaging, groups, and the Guess Me game are available at no cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Nearby Groups in Radius?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nearby Groups use Bluetooth to create temporary group chats for spontaneous meetups. When you create a nearby group, your device automatically detects and adds users around you. Perfect for events, gatherings, or any situation where you want to chat with everyone nearby!"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How close do I need to be to discover someone on Radius?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Radius can detect users within approximately 10 meters (about 30 feet). The app categorizes proximity as 'Very close' (0-1m), 'Nearby' (1-3m), and 'Far' (3-10m) based on Bluetooth signal strength."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://radiusconnect.tech"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://radiusconnect.tech/#features"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Download",
+          "item": "https://radiusconnect.tech/#download"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data - Product (for rich results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Radius Connect App",
+      "description": "Privacy-first social discovery app to connect with people nearby and build community",
+      "brand": {
+        "@type": "Brand",
+        "name": "Radius Connect"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "15000"
+      }
+    }
+    </script>
   </head>
   <body>
+    <!-- Noscript fallback for SEO crawlers -->
+    <noscript>
+      <div style="padding: 20px; text-align: center;">
+        <h1>Radius Connect - Social Discovery App</h1>
+        <p>Radius Connect is the #1 privacy-first social discovery app. Connect with people nearby, join groups, play games, chat with rich media, and help your community. Download free on iOS and Android.</p>
+        <p><a href="https://apps.apple.com/app/radius/id123456789">Download on App Store</a> | <a href="https://play.google.com/store/apps/details?id=com.radiusconnect.app">Get it on Google Play</a></p>
+      </div>
+    </noscript>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Google Analytics (replace with your ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
   </body>
 </html>

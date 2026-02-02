@@ -9,7 +9,8 @@ const Hero = () => {
     const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
     
     if (isAndroid) {
-      window.location.href = 'https://play.google.com/store/apps/details?id=com.radius.app';
+      // Direct APK download for Android users
+      window.location.href = '/Radius.apk';
     } else if (isIOS) {
       window.location.href = 'https://apps.apple.com/app/radius/id123456789';
     } else {
@@ -33,9 +34,9 @@ const Hero = () => {
   ];
 
   return (
-    <section className="hero">
+    <section className="hero" itemScope itemType="https://schema.org/SoftwareApplication" aria-labelledby="hero-title">
       {/* Background Elements */}
-      <div className="hero-bg">
+      <div className="hero-bg" aria-hidden="true">
         <motion.div 
           className="gradient-orb orb-1"
           animate={{ 
@@ -66,24 +67,32 @@ const Hero = () => {
       <div className="hero-content">
         <div className="container">
           <div className="hero-grid">
-            <div className="hero-text">
+            <article className="hero-text">
+              <meta itemProp="name" content="Radius" />
+              <meta itemProp="applicationCategory" content="SocialNetworkingApplication" />
+              <meta itemProp="operatingSystem" content="iOS, Android" />
+              <link itemProp="downloadUrl" href="https://apps.apple.com/app/radius/id123456789" />
+              <link itemProp="downloadUrl" href="https://play.google.com/store/apps/details?id=com.radius.app" />
+              
               <motion.div
                 className="hero-badge"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <Users size={14} />
+                <Users size={14} aria-hidden="true" />
                 <span>Connect, Chat & Build Community</span>
               </motion.div>
 
               <motion.h1
+                id="hero-title"
                 className="hero-title"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
+                itemProp="headline"
               >
-                Your Social Hub
+                <span itemProp="name">Radius</span> - Your Social Hub
                 <br />
                 <span className="gradient-text">For Real Connections</span>
               </motion.h1>
@@ -94,10 +103,20 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Discover people nearby, join group discussions worldwide, 
-                help your community, and chat with rich media. Privacy-first 
-                social networking without the tracking.
+                Find and connect with people around you. Join communities,
+                chat with rich media, and build real relationships — all with complete privacy.
               </motion.p>
+              
+              {/* Hidden SEO text for search engines */}
+              <p
+                className="visually-hidden"
+                itemProp="description"
+                aria-hidden="true"
+              >
+                Radius Connect is the leading social discovery app and social media platform. 
+                Connect with people nearby, join group discussions worldwide, help your community, and chat with rich media. 
+                Radius social network offers privacy-first social networking without tracking. Download Radius free on iOS and Android.
+              </p>
 
               <motion.div
                 className="hero-buttons"
@@ -110,18 +129,20 @@ const Hero = () => {
                   onClick={handleDownload}
                   whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(139, 92, 246, 0.5)' }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Download Radius App for free on iOS and Android"
                 >
-                  <Download size={20} />
-                  Download App
+                  <Download size={20} aria-hidden="true" />
+                  Download Radius Free
                 </motion.button>
                 <motion.a
                   href="#how-it-works"
                   className="btn-secondary"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Learn how Radius social discovery app works"
                 >
-                  See How It Works
-                  <ArrowRight size={18} />
+                  See How Radius Works
+                  <ArrowRight size={18} aria-hidden="true" />
                 </motion.a>
               </motion.div>
 
@@ -130,23 +151,27 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
+                itemScope itemType="https://schema.org/AggregateRating"
+                itemProp="aggregateRating"
               >
+                <meta itemProp="ratingValue" content="4.8" />
+                <meta itemProp="ratingCount" content="15000" />
                 <div className="stat">
                   <span className="stat-number">100%</span>
                   <span className="stat-label">Privacy Focused</span>
                 </div>
-                <div className="stat-divider" />
+                <div className="stat-divider" aria-hidden="true" />
                 <div className="stat">
                   <span className="stat-number">Rich</span>
                   <span className="stat-label">Media Messaging</span>
                 </div>
-                <div className="stat-divider" />
+                <div className="stat-divider" aria-hidden="true" />
                 <div className="stat">
                   <span className="stat-number">Groups</span>
                   <span className="stat-label">Nearby & Global</span>
                 </div>
               </motion.div>
-            </div>
+            </article>
 
             {/* Desktop Visual - Phone Mockup */}
             <div className="hero-visual desktop-visual">

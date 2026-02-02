@@ -127,9 +127,29 @@
   border-radius: 14px;
   color: var(--text-primary);
   transition: all 0.3s ease;
+  position: relative;
 }
 
-.store-btn:hover {
+.store-btn.coming-soon {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.coming-soon-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--gradient-1);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.store-btn:not(.coming-soon):hover {
   border-color: var(--primary);
   background: rgba(139, 92, 246, 0.1);
 }
@@ -149,6 +169,55 @@
 .store-text strong {
   font-size: 1rem;
   font-weight: 600;
+}
+
+/* Direct APK Download Section */
+.direct-apk-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.download-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.download-divider::before,
+.download-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.apk-download-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.apk-download-btn:hover {
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
 }
 
 /* QR Section */
@@ -185,6 +254,11 @@
   color: var(--background);
 }
 
+.qr-code.coming-soon-qr {
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
 .qr-overlay {
   position: absolute;
   inset: 0;
@@ -192,6 +266,18 @@
   align-items: center;
   justify-content: center;
   font-size: 24px;
+}
+
+.qr-coming-soon-text {
+  background: var(--gradient-1);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .qr-hint {

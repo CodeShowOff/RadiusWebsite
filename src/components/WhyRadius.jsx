@@ -81,7 +81,7 @@ const WhyRadius = () => {
   ];
 
   return (
-    <section id="why-radius" className="why-radius-section" ref={ref}>
+    <section id="why-radius" className="why-radius-section" ref={ref} aria-labelledby="why-radius-title">
       <div className="container">
         {/* Stats Section */}
         <motion.div
@@ -89,6 +89,8 @@ const WhyRadius = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
+          role="list"
+          aria-label="Radius app statistics"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -97,6 +99,7 @@ const WhyRadius = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: index * 0.1 }}
+              role="listitem"
             >
               <div className="stat-value">
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} inView={isInView} />
@@ -107,25 +110,25 @@ const WhyRadius = () => {
         </motion.div>
 
         {/* Why Section */}
-        <motion.div
+        <motion.header
           className="why-header"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <span className="section-label">Why Radius</span>
-          <h2 className="section-title">
-            A complete <span className="gradient-text">social experience</span>
+          <span className="section-label">Why Choose Radius</span>
+          <h2 id="why-radius-title" className="section-title">
+            A complete <span className="gradient-text">Radius social experience</span>
           </h2>
           <p className="section-description">
-            Radius combines proximity discovery, group communities, rich messaging, 
-            and helpful features — all while keeping your privacy intact.
+            <strong>Radius app</strong> combines proximity discovery, group communities, rich messaging, 
+            and helpful features — all while keeping your privacy intact. The best <strong>social discovery app</strong> available.
           </p>
-        </motion.div>
+        </motion.header>
 
-        <div className="benefits-grid">
+        <div className="benefits-grid" role="list">
           {benefits.map((benefit, index) => (
-            <motion.div
+            <motion.article
               key={benefit.title}
               className="benefit-card"
               initial={{ opacity: 0, y: 30 }}
@@ -135,49 +138,51 @@ const WhyRadius = () => {
                 y: -5,
                 background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%)',
               }}
+              role="listitem"
             >
-              <div className="benefit-icon">
+              <div className="benefit-icon" aria-hidden="true">
                 <benefit.icon size={22} />
               </div>
               <div className="benefit-content">
                 <h3 className="benefit-title">{benefit.title}</h3>
                 <p className="benefit-description">{benefit.description}</p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
         {/* Comparison Section */}
-        <motion.div
+        <motion.aside
           className="comparison-section"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
+          aria-label="Comparison between Radius and other apps"
         >
           <div className="comparison-card other">
-            <h4>Other Apps</h4>
+            <h4>Other Social Apps</h4>
             <ul>
-              <li><span className="x">✕</span> Track your GPS location</li>
-              <li><span className="x">✕</span> Algorithm decides who you see</li>
-              <li><span className="x">✕</span> Data sold to advertisers</li>
-              <li><span className="x">✕</span> Fake profiles & bots</li>
-              <li><span className="x">✕</span> Match with people miles away</li>
+              <li><span className="x" aria-hidden="true">✕</span> Track your GPS location</li>
+              <li><span className="x" aria-hidden="true">✕</span> Algorithm decides who you see</li>
+              <li><span className="x" aria-hidden="true">✕</span> Data sold to advertisers</li>
+              <li><span className="x" aria-hidden="true">✕</span> Fake profiles & bots</li>
+              <li><span className="x" aria-hidden="true">✕</span> Match with people miles away</li>
             </ul>
           </div>
-          <div className="comparison-divider">
+          <div className="comparison-divider" aria-hidden="true">
             <span>VS</span>
           </div>
           <div className="comparison-card radius">
-            <h4>Radius</h4>
+            <h4>Radius App</h4>
             <ul>
-              <li><span className="check">✓</span> Bluetooth only, no GPS</li>
-              <li><span className="check">✓</span> You choose who to connect with</li>
-              <li><span className="check">✓</span> Your data stays yours</li>
-              <li><span className="check">✓</span> Real people, verified nearby</li>
-              <li><span className="check">✓</span> Connect with people right here</li>
+              <li><span className="check" aria-hidden="true">✓</span> Bluetooth only, no GPS tracking</li>
+              <li><span className="check" aria-hidden="true">✓</span> You choose who to connect with</li>
+              <li><span className="check" aria-hidden="true">✓</span> Your data stays private</li>
+              <li><span className="check" aria-hidden="true">✓</span> Real people, verified nearby</li>
+              <li><span className="check" aria-hidden="true">✓</span> Connect with people right here</li>
             </ul>
           </div>
-        </motion.div>
+        </motion.aside>
       </div>
     </section>
   );

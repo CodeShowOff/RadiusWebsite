@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Main Homepage -->
+  <url>
+    <loc>https://radiusconnect.tech/</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://radiusconnect.tech/og-image.png</image:loc>
+      <image:title>Radius Connect - Social Discovery App</image:title>
+      <image:caption>Radius Connect is the #1 privacy-first social discovery app</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Features Section -->
+  <url>
+    <loc>https://radiusconnect.tech/#features</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- How It Works Section -->
+  <url>
+    <loc>https://radiusconnect.tech/#how-it-works</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Why Radius Section -->
+  <url>
+    <loc>https://radiusconnect.tech/#why-radius</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Download Section -->
+  <url>
+    <loc>https://radiusconnect.tech/#download</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <!-- FAQ Section -->
+  <url>
+    <loc>https://radiusconnect.tech/#faq</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>
