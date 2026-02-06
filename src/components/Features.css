@@ -16,6 +16,17 @@
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .features-section::before {
+    width: 400px;
+    height: 400px;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+}
+
 .features-header {
   text-align: center;
   max-width: 640px;
@@ -58,7 +69,7 @@
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 32px;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
 }
 
@@ -105,10 +116,22 @@
   filter: blur(80px);
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .feature-card:hover .feature-glow {
   opacity: 0.15;
+}
+
+/* Disable glow blur on mobile — major GPU saver */
+@media (max-width: 768px) {
+  .feature-glow {
+    display: none;
+  }
+
+  .feature-card {
+    transition: none;
+  }
 }
 
 /* Feature Highlight */
@@ -222,6 +245,122 @@
 @keyframes typing {
   0%, 60%, 100% { transform: translateY(0); }
   30% { transform: translateY(-6px); }
+}
+
+/* Swiper for Mobile */
+.features-swiper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.swiper-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.swiper-cards {
+  display: flex;
+  transition: transform 0.3s ease-out;
+}
+
+.feature-card-swiper {
+  min-width: 100%;
+  background: var(--background-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px 28px;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.feature-card-swiper:active {
+  cursor: grabbing;
+}
+
+.feature-card-swiper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.feature-card-swiper .feature-icon {
+  margin-bottom: 24px;
+}
+
+.feature-card-swiper .feature-title {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.feature-card-swiper .feature-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.swiper-card-number {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* Swiper Dots */
+.swiper-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.swiper-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease, width 0.3s ease;
+}
+
+.swiper-dot.active {
+  width: 24px;
+  border-radius: 4px;
+}
+
+.swiper-dot:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Swipe Hint */
+.swipe-hint {
+  text-align: center;
+  margin-top: 24px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.swipe-hint span {
+  opacity: 0.6;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 /* Responsive */

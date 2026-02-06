@@ -15,7 +15,7 @@ const FAQ = () => {
     },
     {
       question: 'Is my location tracked by Radius?',
-      answer: 'No! Radius never tracks your GPS location. We only use Bluetooth to detect proximity to other Radius users. This means you\'re only visible to people who are physically near you, and your location data is never stored or shared. Radius is 100% privacy-focused.',
+      answer: 'Radius uses Bluetooth for proximity discovery — NOT GPS. Your location data is never tracked for general use. The ONLY feature that uses GPS location is Nearby Help (SOS) for emergency assistance, and this is completely optional. You can use all other Radius features without ever enabling location permissions.',
     },
     {
       question: 'How close do I need to be to discover someone on Radius?',
@@ -35,7 +35,7 @@ const FAQ = () => {
     },
     {
       question: 'What is Nearby Help feature in Radius?',
-      answer: 'Nearby Help in Radius lets you request or provide assistance to people in your vicinity. When you need help, Radius users within your selected radius receive a notification. Available helpers can accept your request and navigate to your location. It\'s about building a caring, helpful community with Radius!',
+      answer: 'Nearby Help is an SOS feature in Radius that uses GPS location for emergency assistance. You can save your home/work locations and request help when needed. Radius users in your vicinity receive notifications and can navigate to assist you. This is the only Radius feature that uses location data, and it\'s entirely optional.',
     },
     {
       question: 'Can someone message me without my permission on Radius?',

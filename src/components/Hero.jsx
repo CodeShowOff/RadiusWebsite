@@ -1,8 +1,31 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Bluetooth, Users, Sparkles, ArrowRight, Download } from 'lucide-react';
 import './Hero.css';
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  );
+  useEffect(() => {
+    let rafId;
+    const check = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => setIsMobile(window.innerWidth <= 768));
+    };
+    window.addEventListener('resize', check, { passive: true });
+    return () => {
+      window.removeEventListener('resize', check);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+  return isMobile;
+};
+
 const Hero = () => {
+  const isMobile = useIsMobile();
+  const prefersReduced = useReducedMotion();
+  const reduceAnimations = isMobile || prefersReduced;
   const handleDownload = () => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     const isAndroid = /android/i.test(userAgent);
@@ -26,41 +49,50 @@ const Hero = () => {
 
   // Nearby people positions for the 3D animation - evenly distributed
   const nearbyPeople = [
-    { id: 1, angle: -90, distance: 110, delay: 0.5, color: '#8B5CF6' },   // Top
-    { id: 2, angle: -35, distance: 105, delay: 0.7, color: '#06B6D4' },   // Top-right
-    { id: 3, angle: 35, distance: 110, delay: 0.9, color: '#F472B6' },    // Bottom-right
-    { id: 4, angle: 145, distance: 105, delay: 1.1, color: '#10B981' },   // Bottom-left
-    { id: 5, angle: -145, distance: 110, delay: 1.3, color: '#F59E0B' },  // Top-left
+    { id: 1, angle: -90, distance: 140, delay: 0.5, color: '#8B5CF6' },   // Top
+    { id: 2, angle: -30, distance: 135, delay: 0.7, color: '#06B6D4' },   // Top-right
+    { id: 3, angle: 30, distance: 140, delay: 0.9, color: '#F472B6' },    // Bottom-right
+    { id: 4, angle: 150, distance: 135, delay: 1.1, color: '#10B981' },   // Bottom-left
+    { id: 5, angle: -150, distance: 140, delay: 1.3, color: '#F59E0B' },  // Top-left
   ];
 
   return (
     <section className="hero" itemScope itemType="https://schema.org/SoftwareApplication" aria-labelledby="hero-title">
       {/* Background Elements */}
       <div className="hero-bg" aria-hidden="true">
-        <motion.div 
-          className="gradient-orb orb-1"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div 
-          className="gradient-orb orb-2"
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div 
-          className="gradient-orb orb-3"
-          animate={{ 
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        {!reduceAnimations ? (
+          <>
+            <motion.div 
+              className="gradient-orb orb-1"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div 
+              className="gradient-orb orb-2"
+              animate={{ 
+                scale: [1.2, 1, 1.2],
+                opacity: [0.2, 0.4, 0.2],
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div 
+              className="gradient-orb orb-3"
+              animate={{ 
+                scale: [1, 1.3, 1],
+                opacity: [0.2, 0.3, 0.2],
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </>
+        ) : (
+          <>
+            <div className="gradient-orb orb-1" />
+            <div className="gradient-orb orb-2" />
+          </>
+        )}
         <div className="grid-overlay" />
       </div>
 
@@ -103,8 +135,8 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Find and connect with people around you. Join communities,
-                chat with rich media, and build real relationships — all with complete privacy.
+                Discover people nearby using Bluetooth, join communities worldwide,
+                and get emergency help when needed. Chat with rich media — all with privacy-first design.
               </motion.p>
               
               {/* Hidden SEO text for search engines */}
@@ -113,9 +145,9 @@ const Hero = () => {
                 itemProp="description"
                 aria-hidden="true"
               >
-                Radius Connect is the leading social discovery app and social media platform. 
-                Connect with people nearby, join group discussions worldwide, help your community, and chat with rich media. 
-                Radius social network offers privacy-first social networking without tracking. Download Radius free on iOS and Android.
+                Radius is the leading social discovery app using Bluetooth technology. 
+                Connect with people nearby without GPS tracking, join group discussions worldwide, get emergency help with SOS Nearby Help, and chat with rich media. 
+                Radius social network offers privacy-first social networking with Bluetooth discovery. Download Radius free on iOS and Android.
               </p>
 
               <motion.div
@@ -132,7 +164,7 @@ const Hero = () => {
                   aria-label="Download Radius App for free on iOS and Android"
                 >
                   <Download size={20} aria-hidden="true" />
-                  Download Radius Free
+                  Download Radius
                 </motion.button>
                 <motion.a
                   href="#how-it-works"
@@ -188,11 +220,7 @@ const Hero = () => {
                       <span className="app-title">Nearby</span>
                       <div className="app-icons">
                         <div className="scan-indicator">
-                          <motion.div 
-                            className="scan-pulse"
-                            animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          />
+                          <div className="scan-pulse" />
                         </div>
                       </div>
                     </div>
@@ -223,8 +251,8 @@ const Hero = () => {
                   </div>
                 </div>
 
-                {/* Floating Elements */}
-                {floatingIcons.map(({ Icon, delay, x, y }, index) => (
+                {/* Floating Elements — desktop only, skip animation overhead on mobile */}
+                {!reduceAnimations && floatingIcons.map(({ Icon: IconComponent, delay, x, y }, index) => (
                   <motion.div
                     key={index}
                     className="floating-icon"
@@ -241,27 +269,29 @@ const Hero = () => {
                       y: { delay: delay + 0.9, duration: 3, repeat: Infinity, ease: 'easeInOut' },
                     }}
                   >
-                    <Icon size={20} />
+                    <IconComponent size={20} />
                   </motion.div>
                 ))}
 
-                {/* Radar rings */}
-                <div className="radar-rings">
-                  {[1, 2, 3].map((i) => (
-                    <motion.div
-                      key={i}
-                      className="radar-ring"
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      animate={{ scale: [0.5, 1.5], opacity: [0.5, 0] }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: i * 0.8,
-                        ease: 'easeOut',
-                      }}
-                    />
-                  ))}
-                </div>
+                {/* Radar rings — desktop only */}
+                {!reduceAnimations && (
+                  <div className="radar-rings">
+                    {[1, 2, 3].map((i) => (
+                      <motion.div
+                        key={i}
+                        className="radar-ring"
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: [0.5, 1.5], opacity: [0.5, 0] }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          delay: i * 0.8,
+                          ease: 'easeOut',
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
               </motion.div>
             </div>
 
@@ -277,57 +307,55 @@ const Hero = () => {
               </motion.p>
               
               <div className="people-animation-container">
+                {/* Neon background text */}
+                <div className="neon-background-text" aria-hidden="true">RADIUS</div>
+                
                 {/* 3D Platform */}
                 <div className="animation-platform">
                   {/* Curved connection lines from center to nearby people */}
-                  <svg className="connection-svg" viewBox="0 0 340 300">
+                  <svg className="connection-svg" viewBox="0 0 420 380">
+                    <defs>
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
+                    </defs>
                     {nearbyPeople.map((person) => {
-                      const centerX = 170;
-                      const centerY = 140;
+                      const centerX = 210;
+                      const centerY = 200;
                       const endX = centerX + Math.cos((person.angle * Math.PI) / 180) * person.distance;
                       const endY = centerY + Math.sin((person.angle * Math.PI) / 180) * person.distance * 0.6;
                       
-                      // Create curved projectile path with control point
                       const midX = (centerX + endX) / 2;
-                      const midY = (centerY + endY) / 2 - 35; // Arc upward
+                      const midY = (centerY + endY) / 2 - 40;
                       
                       return (
                         <motion.path
                           key={`line-${person.id}`}
                           d={`M ${centerX} ${centerY} Q ${midX} ${midY} ${endX} ${endY}`}
                           stroke={person.color}
-                          strokeWidth="2.5"
+                          strokeWidth="3"
                           fill="none"
                           strokeLinecap="round"
-                          initial={{ pathLength: 0, opacity: 0 }}
-                          animate={{ pathLength: 1, opacity: 0.7 }}
+                          filter="url(#glow)"
+                          initial={{ opacity: 0, pathLength: 0 }}
+                          animate={{ opacity: 0.8, pathLength: 1 }}
                           transition={{ 
-                            pathLength: { duration: 1, delay: person.delay },
-                            opacity: { duration: 0.5, delay: person.delay }
+                            opacity: { delay: person.delay + 0.8, duration: 0.3 },
+                            pathLength: { delay: person.delay + 0.8, duration: 0.5, ease: 'easeOut' }
                           }}
                         />
                       );
                     })}
                   </svg>
 
-                  {/* Scanning rings */}
+                  {/* Scanning rings — use CSS animation, not JS */}
                   <div className="scan-rings">
                     {[1, 2, 3].map((ring) => (
-                      <motion.div
-                        key={ring}
-                        className="scan-ring"
-                        initial={{ scale: 0, opacity: 0.8 }}
-                        animate={{ 
-                          scale: [0, 2.5], 
-                          opacity: [0.6, 0] 
-                        }}
-                        transition={{
-                          duration: 2.5,
-                          repeat: Infinity,
-                          delay: ring * 0.6,
-                          ease: 'easeOut',
-                        }}
-                      />
+                      <div key={ring} className="scan-ring" />
                     ))}
                   </div>
 
@@ -344,34 +372,18 @@ const Hero = () => {
                       </div>
                       <div className="person-torso"></div>
                       <div className="person-arms">
-                        <motion.div 
-                          className="person-arm left"
-                          animate={{ rotate: [0, 10, 0] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        />
-                        <motion.div 
-                          className="person-arm right"
-                          animate={{ rotate: [0, -10, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                        />
+                        <div className="person-arm left" />
+                        <div className="person-arm right" />
                       </div>
                       <div className="person-legs">
                         <div className="person-leg left" />
                         <div className="person-leg right" />
                       </div>
                     </div>
-                    {/* Bluetooth Icon above head */}
-                    <motion.div 
-                      className="bluetooth-indicator"
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: [1, 1.15, 1]
-                      }}
-                      transition={{ duration: 1.5, delay: 0.5, repeat: Infinity }}
-                    >
+                    {/* Bluetooth Icon above head — static on mobile */}
+                    <div className="bluetooth-indicator">
                       <Bluetooth size={18} />
-                    </motion.div>
+                    </div>
                     <span className="person-label">You</span>
                   </motion.div>
 
@@ -386,7 +398,7 @@ const Hero = () => {
                         className="person-3d nearby-person"
                         style={{
                           left: `calc(50% + ${x}px)`,
-                          top: `calc(47% + ${y}px)`,
+                          top: `calc(53% + ${y}px)`,
                         }}
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -415,19 +427,21 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
+      {/* Scroll indicator — desktop only */}
+      {!reduceAnimations && (
         <motion.div
-          className="scroll-dot"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        />
-      </motion.div>
+          className="scroll-indicator"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <motion.div
+            className="scroll-dot"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        </motion.div>
+      )}
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
   Bluetooth, 
@@ -19,12 +19,49 @@ import './Features.css';
 const Features = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  );
+  const [currentCard, setCurrentCard] = useState(0);
+  
+  useEffect(() => {
+    let rafId;
+    const check = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => setIsMobile(window.innerWidth <= 768));
+    };
+    window.addEventListener('resize', check, { passive: true });
+    return () => {
+      window.removeEventListener('resize', check);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  const handleDragEnd = (event, info) => {
+    const threshold = 50;
+    const velocity = info.velocity.x;
+    const offset = info.offset.x;
+
+    if (Math.abs(velocity) > 500 || Math.abs(offset) > threshold) {
+      if (velocity < 0 || offset < 0) {
+        // Swipe left - next card
+        setCurrentCard(prev => Math.min(prev + 1, features.length - 1));
+      } else {
+        // Swipe right - previous card
+        setCurrentCard(prev => Math.max(prev - 1, 0));
+      }
+    }
+  };
+
+  const goToCard = (index) => {
+    setCurrentCard(index);
+  };
 
   const features = [
     {
       icon: Bluetooth,
       title: 'Bluetooth Proximity Discovery',
-      description: 'Radius finds people nearby using Bluetooth LE technology. See who\'s close, who\'s nearby, and who\'s just in range — all without GPS tracking.',
+      description: 'Radius finds people nearby using Bluetooth LE technology — no GPS required. See who\'s close, who\'s nearby, and who\'s just in range. Location is only used for SOS Nearby Help.',
       color: '#8B5CF6',
       gradient: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%)',
     },
@@ -73,14 +110,14 @@ const Features = () => {
     {
       icon: HandHeart,
       title: 'Radius Nearby Help',
-      description: 'Request or provide help to people in your vicinity through Radius. Get notified when someone nearby needs assistance — build a caring community.',
+      description: 'SOS feature using location for emergency assistance. Request or provide help to people nearby. Set home/work locations to get notified when someone needs help in your area.',
       color: '#EC4899',
       gradient: 'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)',
     },
     {
       icon: Shield,
       title: 'Privacy First Design',
-      description: 'Radius never tracks your location or sells data. Your proximity is shared only when you\'re physically there.',
+      description: 'Radius uses Bluetooth for proximity discovery — no GPS tracking. Location is only used for Nearby Help (SOS) feature. We never sell your data.',
       color: '#EF4444',
       gradient: 'linear-gradient(135deg, #EF4444 0%, #F87171 100%)',
     },
@@ -125,48 +162,124 @@ const Features = () => {
             Everything Radius offers for
             <span className="gradient-text"> meaningful connections</span>
           </h2>
-          <p className="section-description">
+          <p className="section-description mobile-hidden">
             From <strong>Bluetooth nearby discovery</strong> to global communities, from one-on-one chats to group discussions,
             <strong> Radius social app</strong> offers a complete social experience that respects your privacy.
           </p>
         </motion.header>
 
-        <motion.div
-          className="features-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          role="list"
-        >
-          {features.map((feature, index) => (
-            <motion.article
-              key={feature.title}
-              className="feature-card"
-              variants={cardVariants}
-              whileHover={{ 
-                y: -8, 
-                boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px ${feature.color}20`,
-              }}
-              role="listitem"
-              itemScope
-              itemType="https://schema.org/ListItem"
-              itemProp="itemListElement"
-            >
-              <meta itemProp="position" content={String(index + 1)} />
-              <div 
-                className="feature-icon"
-                style={{ background: feature.gradient }}
-                aria-hidden="true"
+        {/* Desktop: Grid Layout */}
+        {!isMobile && (
+          <motion.div
+            className="features-grid"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            role="list"
+          >
+            {features.map((feature, index) => (
+              <motion.article
+                key={feature.title}
+                className="feature-card"
+                variants={cardVariants}
+                whileHover={{ 
+                  y: -8, 
+                  boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px ${feature.color}20`,
+                }}
+                role="listitem"
+                itemScope
+                itemType="https://schema.org/ListItem"
+                itemProp="itemListElement"
               >
-                <feature.icon size={24} />
-              </div>
-              <h3 className="feature-title" itemProp="name">{feature.title}</h3>
-              <p className="feature-description" itemProp="description">{feature.description}</p>
-              
-              <div className="feature-glow" style={{ background: feature.color }} aria-hidden="true" />
-            </motion.article>
-          ))}
-        </motion.div>
+                <meta itemProp="position" content={String(index + 1)} />
+                <div 
+                  className="feature-icon"
+                  style={{ background: feature.gradient }}
+                  aria-hidden="true"
+                >
+                  <feature.icon size={24} />
+                </div>
+                <h3 className="feature-title" itemProp="name">{feature.title}</h3>
+                <p className="feature-description" itemProp="description">{feature.description}</p>
+                
+                <div className="feature-glow" style={{ background: feature.color }} aria-hidden="true" />
+              </motion.article>
+            ))}
+          </motion.div>
+        )}
+
+        {/* Mobile: Tinder-style Swiper */}
+        {isMobile && (
+          <div className="features-swiper" role="list">
+            <div className="swiper-container">
+              <motion.div
+                className="swiper-cards"
+                animate={{ x: `-${currentCard * 100}%` }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              >
+                {features.map((feature, index) => (
+                  <motion.article
+                    key={feature.title}
+                    className="feature-card-swiper"
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.7}
+                    onDragEnd={handleDragEnd}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: 0.2 }}
+                    role="listitem"
+                    itemScope
+                    itemType="https://schema.org/ListItem"
+                    itemProp="itemListElement"
+                  >
+                    <meta itemProp="position" content={String(index + 1)} />
+                    <div 
+                      className="feature-icon"
+                      style={{ background: feature.gradient }}
+                      aria-hidden="true"
+                    >
+                      <feature.icon size={28} />
+                    </div>
+                    <h3 className="feature-title" itemProp="name">{feature.title}</h3>
+                    <p className="feature-description" itemProp="description">{feature.description}</p>
+                    
+                    <div className="swiper-card-number">
+                      {index + 1} / {features.length}
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Swipe Navigation Dots */}
+            <div className="swiper-dots">
+              {features.map((_, index) => (
+                <button
+                  key={index}
+                  className={`swiper-dot ${currentCard === index ? 'active' : ''}`}
+                  onClick={() => goToCard(index)}
+                  aria-label={`Go to feature ${index + 1}`}
+                  style={{
+                    background: currentCard === index ? features[index].color : 'var(--border)',
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Swipe Hint */}
+            {currentCard === 0 && (
+              <motion.div
+                className="swipe-hint"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+              >
+                <span>← Swipe to explore →</span>
+              </motion.div>
+            )}
+          </div>
+        )}
 
         {/* Feature Highlight */}
         <motion.aside

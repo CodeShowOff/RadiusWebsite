@@ -1,16 +1,28 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import TrustedBy from './components/TrustedBy'
-import Features from './components/Features'
-import HowItWorks from './components/HowItWorks'
-import WhyRadius from './components/WhyRadius'
-import DownloadSection from './components/Download'
-import FAQ from './components/FAQ'
-import Footer from './components/Footer'
 import './App.css'
 
+// Lazy load pages
+const Home = lazy(() => import('./pages/Home'))
+const About = lazy(() => import('./pages/About'))
+const Blog = lazy(() => import('./pages/Blog'))
+const Careers = lazy(() => import('./pages/Careers'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const Terms = lazy(() => import('./pages/Terms'))
+const Cookies = lazy(() => import('./pages/Cookies'))
+const Footer = lazy(() => import('./components/Footer'))
+
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo(0, 0);
+  }, [location]);
+
   useEffect(() => {
     // Update page title dynamically for better SEO signals
     document.title = 'Radius Connect | Social Discovery App - Connect, Chat & Build Community';
@@ -48,19 +60,30 @@ function App() {
     updateStructuredData();
   }, []);
 
+  // Check if we're on the home page
+  const isHomePage = location.pathname === '/';
+
   return (
     <div itemScope itemType="https://schema.org/WebPage">
       <Navbar />
       <main role="main" itemProp="mainContentOfPage">
-        <Hero />
-        <TrustedBy />
-        <Features />
-        <HowItWorks />
-        <WhyRadius />
-        <DownloadSection />
-        <FAQ />
+        {isHomePage && <Hero />}
+        <Suspense fallback={<div style={{ minHeight: '50vh' }} />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
+          </Routes>
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   )
 }

@@ -127,7 +127,7 @@ const HowItWorks = () => {
         'Nearby users get notified',
         'Helpers can navigate to you',
       ],
-      description: 'Community assistance system to help or get help from people nearby.'
+      description: 'SOS feature using location for emergency assistance. The only Radius feature that uses GPS for safety.'
     },
     {
       icon: Shield,
@@ -137,9 +137,9 @@ const HowItWorks = () => {
         'Toggle discovery on/off anytime',
         'Control who can message you',
         'Disable help alerts in settings',
-        'No GPS tracking, ever',
+        'GPS only for SOS Nearby Help',
       ],
-      description: 'Complete control over your visibility and privacy at all times.'
+      description: 'Complete control over your visibility and privacy. Bluetooth for discovery, location only for emergency help.'
     },
   ];
 
@@ -256,13 +256,9 @@ const HowItWorks = () => {
             <div className="demo-phone">
               <div className="demo-screen">
                 <div className="radar-visualization">
-                  <motion.div
-                    className="radar-center"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
+                  <div className="radar-center">
                     <span>You</span>
-                  </motion.div>
+                  </div>
                   {[1, 2, 3].map((ring) => (
                     <motion.div
                       key={ring}

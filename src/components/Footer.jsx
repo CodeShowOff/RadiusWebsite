@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Radio, Twitter, Instagram, Github, Heart } from 'lucide-react';
 import './Footer.css';
 
@@ -7,28 +8,28 @@ const Footer = () => {
 
   const footerLinks = {
     Product: [
-      { name: 'Radius Features', href: '#features' },
-      { name: 'How Radius Works', href: '#how-it-works' },
-      { name: 'Download Radius', href: '#download' },
-      { name: 'Radius FAQ', href: '#faq' },
+      { name: 'Radius Features', href: '/#features' },
+      { name: 'How Radius Works', href: '/#how-it-works' },
+      { name: 'Download Radius', href: '/#download' },
+      { name: 'Radius FAQ', href: '/#faq' },
     ],
     Company: [
-      { name: 'About Radius', href: '#' },
-      { name: 'Radius Blog', href: '#' },
-      { name: 'Careers at Radius', href: '#' },
-      { name: 'Contact Radius', href: 'mailto:hello@radius.app' },
+      { name: 'About Radius', href: '/about' },
+      { name: 'Radius Blog', href: '/blog' },
+      { name: 'Careers at Radius', href: '/careers' },
+      { name: 'Contact Radius', href: '/contact' },
     ],
     Legal: [
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'Terms of Service', href: '#' },
-      { name: 'Cookie Policy', href: '#' },
+      { name: 'Privacy Policy', href: '/privacy' },
+      { name: 'Terms of Service', href: '/terms' },
+      { name: 'Cookie Policy', href: '/cookies' },
     ],
   };
 
   const socialLinks = [
-    { Icon: Twitter, href: 'https://twitter.com/radiusapp', label: 'Follow Radius on Twitter' },
-    { Icon: Instagram, href: 'https://instagram.com/radiusapp', label: 'Follow Radius on Instagram' },
-    { Icon: Github, href: 'https://github.com/radiusapp', label: 'Radius on GitHub' },
+    { Icon: Twitter, href: 'https://x.com/CodeShowOff', label: 'Follow Radius on Twitter' },
+    { Icon: Instagram, href: 'https://www.instagram.com/codeshowoff/', label: 'Follow Radius on Instagram' },
+    { Icon: Github, href: 'https://github.com/CodeShowOff', label: 'Radius on GitHub' },
   ];
 
   return (
@@ -40,20 +41,21 @@ const Footer = () => {
           <div className="footer-brand" itemScope itemType="https://schema.org/Organization">
             <meta itemProp="name" content="Radius" />
             <meta itemProp="url" content="https://radius.app" />
-            <motion.a 
-              href="#" 
-              className="footer-logo"
-              whileHover={{ scale: 1.05 }}
-              aria-label="Radius - Home"
-              itemProp="url"
-            >
-              <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" />
-              <span itemProp="name">Radius</span>
-            </motion.a>
+            <Link to="/">
+              <motion.div
+                className="footer-logo"
+                whileHover={{ scale: 1.05 }}
+                aria-label="Radius - Home"
+                itemProp="url"
+              >
+                <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" />
+                <span itemProp="name">Radius</span>
+              </motion.div>
+            </Link>
             
             <p className="footer-tagline" itemProp="description">
-              <strong>Radius</strong> - Discover genuine connections with people around you. 
-              Privacy-first social discovery powered by Bluetooth. Download Radius free on iOS and Android.
+              <strong>Radius</strong> - Discover genuine connections using Bluetooth proximity discovery. 
+              Join communities, get emergency help, and chat with rich media. Privacy-first social app. Download Radius free on iOS and Android.
             </p>
 
             <nav className="social-links" aria-label="Radius social media links">
@@ -81,7 +83,11 @@ const Footer = () => {
               <ul>
                 {links.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href}>{link.name}</a>
+                    {link.href.startsWith('/#') ? (
+                      <a href={link.href}>{link.name}</a>
+                    ) : (
+                      <Link to={link.href}>{link.name}</Link>
+                    )}
                   </li>
                 ))}
               </ul>

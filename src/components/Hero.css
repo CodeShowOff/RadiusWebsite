@@ -32,6 +32,7 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
+  will-change: transform, opacity;
 }
 
 .orb-1 {
@@ -140,7 +141,7 @@
   border-radius: 50px;
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .btn-secondary {
@@ -154,7 +155,7 @@
   font-size: 1rem;
   font-weight: 600;
   border: 1px solid var(--border);
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .btn-secondary:hover {
@@ -270,6 +271,12 @@
   inset: -4px;
   border: 2px solid var(--success);
   border-radius: 50%;
+  animation: scanPulseSmall 2s ease-in-out infinite;
+}
+
+@keyframes scanPulseSmall {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0; }
 }
 
 .user-list {
@@ -484,13 +491,12 @@
     line-height: 1.6;
     color: var(--text);
     text-align: center;
-    margin: 0 auto 28px;
+    margin: 0 auto 20px;
     padding: 14px 20px;
-    max-width: 340px;
-    background: rgba(139, 92, 246, 0.08);
+    max-width: 400px;
+    background: rgba(139, 92, 246, 0.12);
     border: 1px solid rgba(139, 92, 246, 0.2);
     border-radius: 12px;
-    backdrop-filter: blur(10px);
   }
 
   .mobile-visual {
@@ -513,7 +519,7 @@
     width: 100%;
     gap: 10px;
     margin-bottom: 0;
-    margin-top: 8px;
+    margin-top: 12px;
     max-width: 280px;
   }
 
@@ -532,25 +538,50 @@
   /* 3D People Animation Styles */
   .people-animation-container {
     width: 100%;
-    max-width: 340px;
-    height: 300px;
+    max-width: 420px;
+    height: 380px;
     position: relative;
-    perspective: 800px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 32px auto;
+  }
+
+  /* Neon background text */
+  .neon-background-text {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: rgba(139, 92, 246, 0.15);
+    text-shadow: 
+      0 0 10px rgba(139, 92, 246, 0.5),
+      0 0 20px rgba(139, 92, 246, 0.4),
+      0 0 30px rgba(139, 92, 246, 0.3),
+      0 0 40px rgba(139, 92, 246, 0.2);
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    animation: neonGlow 3s ease-in-out infinite;
   }
 
   .animation-platform {
     width: 100%;
     height: 100%;
     position: relative;
-    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Connection SVG lines */
   .connection-svg {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -563,8 +594,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     z-index: 2;
   }
 
@@ -584,12 +615,11 @@
     position: absolute;
     top: 60%;
     left: 50%;
-    transform: translate(-50%, 0) rotateX(75deg);
-    width: 240px;
-    height: 240px;
+    transform: translate(-50%, 0);
+    width: 300px;
+    height: 180px;
     background: radial-gradient(ellipse at center, 
-      rgba(139, 92, 246, 0.12) 0%, 
-      rgba(139, 92, 246, 0.04) 40%,
+      rgba(139, 92, 246, 0.10) 0%, 
       transparent 70%
     );
     border-radius: 50%;
@@ -602,11 +632,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform-style: preserve-3d;
   }
 
   .center-person {
-    top: 50%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -621,7 +650,8 @@
   .connection-svg {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -634,7 +664,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform-style: preserve-3d;
   }
 
   .person-body.small {
@@ -642,8 +671,8 @@
   }
 
   .person-head {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     background: linear-gradient(145deg, #ffd5b8 0%, #e8b896 100%);
     border-radius: 50%;
     position: relative;
@@ -654,8 +683,8 @@
   }
 
   .center-person .person-head {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
   }
 
   .person-face {
@@ -687,8 +716,8 @@
   }
 
   .person-torso {
-    width: 32px;
-    height: 38px;
+    width: 36px;
+    height: 42px;
     background: linear-gradient(145deg, #8B5CF6 0%, #7C3AED 100%);
     border-radius: 8px 8px 4px 4px;
     margin-top: -4px;
@@ -699,8 +728,8 @@
   }
 
   .center-person .person-torso {
-    width: 40px;
-    height: 46px;
+    width: 46px;
+    height: 54px;
   }
 
   .nearby-person .person-torso {
@@ -709,20 +738,20 @@
 
   .person-arms {
     position: absolute;
-    top: 40px;
-    width: 70px;
+    top: 44px;
+    width: 78px;
     display: flex;
     justify-content: space-between;
   }
 
   .center-person .person-arms {
-    top: 50px;
-    width: 85px;
+    top: 58px;
+    width: 96px;
   }
 
   .person-arm {
-    width: 10px;
-    height: 30px;
+    width: 11px;
+    height: 34px;
     background: linear-gradient(145deg, #8B5CF6 0%, #7C3AED 100%);
     border-radius: 5px;
     transform-origin: top center;
@@ -730,8 +759,8 @@
   }
 
   .center-person .person-arm {
-    width: 12px;
-    height: 36px;
+    width: 14px;
+    height: 42px;
   }
 
   .person-legs {
@@ -741,26 +770,26 @@
   }
 
   .person-leg {
-    width: 12px;
-    height: 32px;
+    width: 14px;
+    height: 36px;
     background: linear-gradient(145deg, #374151 0%, #1F2937 100%);
     border-radius: 4px 4px 6px 6px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   }
 
   .center-person .person-leg {
-    width: 15px;
-    height: 40px;
+    width: 18px;
+    height: 46px;
   }
 
   /* Bluetooth indicator */
   .bluetooth-indicator {
     position: absolute;
-    top: -35px;
+    top: -42px;
     left: 50%;
     transform: translateX(-50%);
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
     border-radius: 50%;
     display: flex;
@@ -772,14 +801,19 @@
       0 4px 12px rgba(0,0,0,0.3);
   }
 
+  .bluetooth-indicator svg {
+    width: 20px;
+    height: 20px;
+  }
+
   .person-label {
     position: absolute;
-    bottom: -22px;
-    font-size: 0.7rem;
+    bottom: -26px;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--text);
     background: rgba(139, 92, 246, 0.25);
-    padding: 3px 12px;
+    padding: 4px 14px;
     border-radius: 10px;
     white-space: nowrap;
   }
@@ -804,50 +838,54 @@
   }
 
   .people-animation-container {
-    max-width: 300px;
-    height: 260px;
+    max-width: 360px;
+    height: 320px;
     margin-bottom: 32px;
   }
 
+  .neon-background-text {
+    font-size: 4rem;
+  }
+
   .ground-plane {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 150px;
   }
 
   .center-person .person-head {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
   }
 
   .center-person .person-torso {
-    width: 34px;
-    height: 38px;
+    width: 40px;
+    height: 46px;
   }
 
   .center-person .person-arms {
-    top: 42px;
-    width: 70px;
+    top: 50px;
+    width: 82px;
   }
 
   .center-person .person-arm {
-    width: 10px;
-    height: 28px;
+    width: 12px;
+    height: 36px;
   }
 
   .center-person .person-leg {
-    width: 12px;
-    height: 32px;
+    width: 15px;
+    height: 40px;
   }
 
   .bluetooth-indicator {
-    width: 28px;
-    height: 28px;
-    top: -30px;
+    width: 34px;
+    height: 34px;
+    top: -38px;
   }
 
   .bluetooth-indicator svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -858,13 +896,41 @@
   }
 
   .people-animation-container {
-    max-width: 260px;
-    height: 230px;
+    max-width: 320px;
+    height: 280px;
     margin-bottom: 28px;
+  }
+
+  .neon-background-text {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .neon-background-text {
+    font-size: 3rem;
   }
 }
 
 /* ===== 3D People Animation Keyframes ===== */
+
+/* Neon glow animation */
+@keyframes neonGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(139, 92, 246, 0.5),
+      0 0 20px rgba(139, 92, 246, 0.4),
+      0 0 30px rgba(139, 92, 246, 0.3),
+      0 0 40px rgba(139, 92, 246, 0.2);
+  }
+  50% {
+    text-shadow: 
+      0 0 15px rgba(139, 92, 246, 0.6),
+      0 0 30px rgba(139, 92, 246, 0.5),
+      0 0 45px rgba(139, 92, 246, 0.4),
+      0 0 60px rgba(139, 92, 246, 0.3);
+  }
+}
 
 /* Scan ring expanding animation */
 @keyframes scanPulse {
@@ -944,46 +1010,50 @@
   }
 }
 
-/* Apply animations within media query */
+/* Apply simplified animations on mobile - reduce GPU load */
 @media (max-width: 768px) {
-  .scan-ring {
-    animation: scanPulse 2.5s ease-out infinite;
+  /* Disable heavy blur on gradient orbs for mobile */
+  .gradient-orb {
+    filter: blur(40px);
+    opacity: 0.15 !important;
+    animation: none !important;
   }
 
-  .scan-ring:nth-child(1) {
-    animation-delay: 0s;
+  /* Simplified scan ring - CSS only, no JS animation needed */
+  .scan-ring {
+    animation: scanPulse 3s ease-out infinite;
   }
 
   .scan-ring:nth-child(2) {
-    animation-delay: 0.5s;
-  }
-
-  .scan-ring:nth-child(3) {
     animation-delay: 1s;
   }
 
-  .center-person .person-arm.left {
-    animation: waveArm 1.5s ease-in-out infinite;
+  .scan-ring:nth-child(3) {
+    animation-delay: 2s;
   }
 
+  /* Remove arm waving - unnecessary detail */
+  .center-person .person-arm.left,
   .center-person .person-arm.right {
-    animation: waveArmRight 1.5s ease-in-out infinite;
+    animation: none;
   }
 
+  /* Simplify bluetooth glow - just use static glow */
   .bluetooth-indicator {
-    animation: bluetoothGlow 2s ease-in-out infinite;
+    animation: none;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5), 0 4px 8px rgba(0,0,0,0.3);
   }
 
   .connection-line path {
     stroke-dasharray: 8 4;
-    animation: dashFlow 1s linear infinite;
+    animation: none;
   }
 
   .nearby-person {
-    animation: personFloat 3s ease-in-out infinite;
+    animation: none;
   }
 
   .connection-pulse {
-    animation: connectionPulse 2s ease-out infinite;
+    animation: none;
   }
 }

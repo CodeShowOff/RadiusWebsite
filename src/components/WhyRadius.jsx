@@ -1,15 +1,18 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { Shield, Zap, Eye, Lock, Globe, Heart } from 'lucide-react';
 import './WhyRadius.css';
 
 const AnimatedNumber = ({ value, suffix = '', inView }) => {
   const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !hasAnimated.current) {
+      hasAnimated.current = true;
       let startTime = null;
-      const duration = 2000;
+      const duration = 1500;
+      let rafId;
       
       const animate = (currentTime) => {
         if (!startTime) startTime = currentTime;
@@ -20,11 +23,12 @@ const AnimatedNumber = ({ value, suffix = '', inView }) => {
         setCount(Math.round(easeOut * value));
         
         if (progress < 1) {
-          requestAnimationFrame(animate);
+          rafId = requestAnimationFrame(animate);
         }
       };
       
-      requestAnimationFrame(animate);
+      rafId = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(rafId);
     }
   }, [inView, value]);
 
@@ -42,7 +46,7 @@ const WhyRadius = () => {
 
   const stats = [
     { value: 100, suffix: '%', label: 'Privacy Protected' },
-    { value: 0, suffix: '', label: 'Location Tracking' },
+    { value: 1, suffix: '', label: 'Feature Uses GPS' },
     { value: 9, suffix: '+', label: 'Core Features' },
     { value: 3, suffix: '', label: 'Group Types' },
   ];
@@ -51,7 +55,7 @@ const WhyRadius = () => {
     {
       icon: Shield,
       title: 'Privacy First',
-      description: 'No GPS tracking. Bluetooth for proximity, internet for groups. You control your visibility.',
+      description: 'Bluetooth for proximity discovery — no GPS tracking. Location only used for Nearby Help (SOS) feature. You control your visibility.',
     },
     {
       icon: Globe,
@@ -175,7 +179,7 @@ const WhyRadius = () => {
           <div className="comparison-card radius">
             <h4>Radius App</h4>
             <ul>
-              <li><span className="check" aria-hidden="true">✓</span> Bluetooth only, no GPS tracking</li>
+              <li><span className="check" aria-hidden="true">✓</span> Bluetooth discovery, GPS only for SOS</li>
               <li><span className="check" aria-hidden="true">✓</span> You choose who to connect with</li>
               <li><span className="check" aria-hidden="true">✓</span> Your data stays private</li>
               <li><span className="check" aria-hidden="true">✓</span> Real people, verified nearby</li>

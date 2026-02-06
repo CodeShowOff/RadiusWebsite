@@ -1,5 +1,5 @@
 .trusted-section {
-  padding: 60px 0 80px;
+  padding: 20px 0 80px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -34,7 +34,7 @@
 
 @media (max-width: 768px) {
   .trusted-section {
-    padding: 40px 0 60px;
+    padding: 16px 0 60px;
   }
 
   .trusted-logos {

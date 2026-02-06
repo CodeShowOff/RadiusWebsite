@@ -1,25 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Radio } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const ticking = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (!ticking.current) {
+        ticking.current = true;
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+          ticking.current = false;
+        });
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Radius Features', href: '#features' },
-    { name: 'How Radius Works', href: '#how-it-works' },
-    { name: 'Why Radius', href: '#why-radius' },
-    { name: 'Radius FAQ', href: '#faq' },
+    { name: 'Radius Features', href: '/#features' },
+    { name: 'How Radius Works', href: '/#how-it-works' },
+    { name: 'Why Radius', href: '/#why-radius' },
+    { name: 'Radius FAQ', href: '/#faq' },
   ];
 
   const handleDownload = () => {
@@ -48,17 +56,18 @@ const Navbar = () => {
         role="banner"
       >
         <nav className="navbar-container" aria-label="Main navigation">
-          <motion.a 
-            href="#" 
-            className="navbar-logo"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Radius - Home"
-            title="Radius App - Meet People Around You"
-          >
-            <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" />
-            <span>Radius</span>
-          </motion.a>
+          <Link to="/">
+            <motion.div
+              className="navbar-logo"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Radius - Home"
+              title="Radius App - Meet People Around You"
+            >
+              <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" />
+              <span>Radius</span>
+            </motion.div>
+          </Link>
 
           <div className="navbar-links" role="menubar">
             {navLinks.map((link, index) => (
@@ -71,6 +80,16 @@ const Navbar = () => {
                 transition={{ delay: index * 0.1 + 0.3 }}
                 whileHover={{ y: -2 }}
                 role="menuitem"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const targetId = link.href.replace('/#', '');
+                  const element = document.getElementById(targetId);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  } else {
+                    window.location.href = link.href;
+                  }
+                }}
               >
                 {link.name}
               </motion.a>
@@ -116,7 +135,17 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className="mobile-nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  const targetId = link.href.replace('/#', '');
+                  const element = document.getElementById(targetId);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  } else {
+                    window.location.href = link.href;
+                  }
+                }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
