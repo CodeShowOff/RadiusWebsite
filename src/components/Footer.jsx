@@ -48,7 +48,7 @@ const Footer = () => {
                 aria-label="Radius - Home"
                 itemProp="url"
               >
-                <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" />
+                <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" loading="lazy" decoding="async" />
                 <span itemProp="name">Radius</span>
               </motion.div>
             </Link>

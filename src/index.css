@@ -134,6 +134,44 @@ img {
     -webkit-backdrop-filter: none;
     background: rgba(26, 26, 36, 0.95);
   }
+
+  /* Disable expensive transitions on mobile */
+  .feature-card,
+  .step-card,
+  .benefit-card,
+  .stat-card {
+    transition: none !important;
+  }
+
+  /* Disable transform/opacity animations on cards */
+  .feature-card:hover,
+  .step-card:hover,
+  .benefit-card:hover {
+    transform: none !important;
+  }
+
+  /* Reduce shadow complexity */
+  [class*="shadow"],
+  [class*="glow"] {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* CSS containment for performance */
+  section {
+    contain: layout style;
+  }
+
+  /* Hardware acceleration for scrolling */
+  .features-swiper,
+  .swiper-cards {
+    will-change: transform;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Reduce paint areas */
+  .gradient-orb {
+    display: none;
+  }
 }
 
 /* Respect reduced motion preferences */

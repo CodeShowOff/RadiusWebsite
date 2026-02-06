@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Download, Apple, Play, Smartphone, QrCode } from 'lucide-react';
+import { Download, Apple, Play, Smartphone } from 'lucide-react';
 import './Download.css';
 
 const DownloadSection = () => {
@@ -125,23 +125,6 @@ const DownloadSection = () => {
             </motion.button>
           </motion.div>
 
-          <motion.div
-            className="qr-section"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.6 }}
-          >
-            <div className="qr-divider">
-              <span>or scan to download</span>
-            </div>
-            <div className="qr-code coming-soon-qr">
-              <QrCode size={100} strokeWidth={1} />
-              <div className="qr-overlay">
-                <span className="qr-coming-soon-text">Coming Soon</span>
-              </div>
-            </div>
-            <p className="qr-hint">QR code will be available soon</p>
-          </motion.div>
         </motion.div>
 
         {/* Floating phones decoration */}

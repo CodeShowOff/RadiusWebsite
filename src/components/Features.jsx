@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
   Bluetooth, 
@@ -15,6 +15,56 @@ import {
   HandHeart
 } from 'lucide-react';
 import './Features.css';
+
+// Memoized feature card to prevent re-renders
+const FeatureCard = memo(({ feature, index, isInView, isMobile }) => {
+  const cardVariants = {
+    hidden: { opacity: 0, y: isMobile ? 20 : 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: isMobile ? 0.3 : 0.5,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  // Simplified hover props for mobile
+  const hoverProps = useMemo(() => isMobile ? {} : {
+    whileHover: { 
+      y: -8, 
+      boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px ${feature.color}20`,
+    }
+  }, [isMobile, feature.color]);
+
+  return (
+    <motion.article
+      className="feature-card"
+      variants={cardVariants}
+      {...hoverProps}
+      role="listitem"
+      itemScope
+      itemType="https://schema.org/ListItem"
+      itemProp="itemListElement"
+    >
+      <meta itemProp="position" content={String(index + 1)} />
+      <div 
+        className="feature-icon"
+        style={{ background: feature.gradient }}
+        aria-hidden="true"
+      >
+        <feature.icon size={24} />
+      </div>
+      <h3 className="feature-title" itemProp="name">{feature.title}</h3>
+      <p className="feature-description" itemProp="description">{feature.description}</p>
+      
+      {!isMobile && <div className="feature-glow" style={{ background: feature.color }} aria-hidden="true" />}
+    </motion.article>
+  );
+});
+
+FeatureCard.displayName = 'FeatureCard';
 
 const Features = () => {
   const ref = useRef(null);
@@ -57,7 +107,7 @@ const Features = () => {
     setCurrentCard(index);
   };
 
-  const features = [
+  const features = useMemo(() => [
     {
       icon: Bluetooth,
       title: 'Bluetooth Proximity Discovery',
@@ -121,29 +171,17 @@ const Features = () => {
       color: '#EF4444',
       gradient: 'linear-gradient(135deg, #EF4444 0%, #F87171 100%)',
     },
-  ];
+  ], []);
 
-  const containerVariants = {
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: isMobile ? 0 : 0.1,
       },
     },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
+  }), [isMobile]);
 
   return (
     <section id="features" className="features-section" ref={ref} aria-labelledby="features-title" itemScope itemType="https://schema.org/ItemList">
@@ -153,9 +191,9 @@ const Features = () => {
       <div className="container">
         <motion.header
           className="features-header"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: isMobile ? 15 : 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: isMobile ? 0.3 : 0.6 }}
         >
           <span className="section-label">Radius App Features</span>
           <h2 id="features-title" className="section-title">
@@ -178,32 +216,13 @@ const Features = () => {
             role="list"
           >
             {features.map((feature, index) => (
-              <motion.article
+              <FeatureCard
                 key={feature.title}
-                className="feature-card"
-                variants={cardVariants}
-                whileHover={{ 
-                  y: -8, 
-                  boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px ${feature.color}20`,
-                }}
-                role="listitem"
-                itemScope
-                itemType="https://schema.org/ListItem"
-                itemProp="itemListElement"
-              >
-                <meta itemProp="position" content={String(index + 1)} />
-                <div 
-                  className="feature-icon"
-                  style={{ background: feature.gradient }}
-                  aria-hidden="true"
-                >
-                  <feature.icon size={24} />
-                </div>
-                <h3 className="feature-title" itemProp="name">{feature.title}</h3>
-                <p className="feature-description" itemProp="description">{feature.description}</p>
-                
-                <div className="feature-glow" style={{ background: feature.color }} aria-hidden="true" />
-              </motion.article>
+                feature={feature}
+                index={index}
+                isInView={isInView}
+                isMobile={isMobile}
+              />
             ))}
           </motion.div>
         )}
@@ -225,9 +244,9 @@ const Features = () => {
                     dragConstraints={{ left: 0, right: 0 }}
                     dragElastic={0.7}
                     onDragEnd={handleDragEnd}
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.2 }}
+                    transition={{ delay: 0.1, duration: 0.3 }}
                     role="listitem"
                     itemScope
                     itemType="https://schema.org/ListItem"

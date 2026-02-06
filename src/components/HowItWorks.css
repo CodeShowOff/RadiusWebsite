@@ -3,6 +3,7 @@
   background: var(--background-secondary);
   position: relative;
   overflow: hidden;
+  contain: layout style;
 }
 
 .how-it-works-section::before {

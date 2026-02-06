@@ -1,12 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
+// Inline mobile check for initial render - avoids flash
+const getIsMobile = () => typeof window !== 'undefined' && window.innerWidth <= 768;
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(getIsMobile);
   const ticking = useRef(false);
 
   useEffect(() => {
@@ -21,6 +25,14 @@ const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const navLinks = [
@@ -46,25 +58,35 @@ const Navbar = () => {
     }
   };
 
+  // Simplified hover props for mobile
+  const hoverProps = useMemo(() => isMobile ? {} : {
+    whileHover: { scale: 1.05, boxShadow: '0 0 30px rgba(139, 92, 246, 0.5)' },
+    whileTap: { scale: 0.95 }
+  }, [isMobile]);
+
+  const logoHoverProps = useMemo(() => isMobile ? {} : {
+    whileHover: { scale: 1.05 },
+    whileTap: { scale: 0.95 }
+  }, [isMobile]);
+
   return (
     <>
       <motion.header
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
         role="banner"
       >
         <nav className="navbar-container" aria-label="Main navigation">
           <Link to="/">
             <motion.div
               className="navbar-logo"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              {...logoHoverProps}
               aria-label="Radius - Home"
               title="Radius App - Meet People Around You"
             >
-              <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" />
+              <img src="/app_icon.png" alt="Radius App Logo" className="logo-icon" loading="eager" decoding="async" fetchpriority="high" />
               <span>Radius</span>
             </motion.div>
           </Link>
@@ -75,10 +97,9 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className="nav-link"
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3 }}
-                whileHover={{ y: -2 }}
+                transition={{ delay: index * 0.05 + 0.2, duration: 0.3 }}
                 role="menuitem"
                 onClick={(e) => {
                   e.preventDefault();
@@ -99,11 +120,10 @@ const Navbar = () => {
           <motion.button
             className="navbar-cta"
             onClick={handleDownload}
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(139, 92, 246, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
+            {...hoverProps}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
             aria-label="Download Radius App"
           >
             Get Radius
@@ -127,7 +147,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
             aria-label="Mobile navigation"
           >
             {navLinks.map((link, index) => (

@@ -2,6 +2,7 @@
   padding: 120px 0;
   position: relative;
   overflow: hidden;
+  contain: layout style;
 }
 
 .features-section::before {

@@ -27,14 +27,14 @@
    - Replace `https://play.google.com/store/apps/details?id=com.radius.app` with real URL
 
 4. **Register Domain**
-   - Ensure `radiusconnect.tech` domain is registered
+   - Ensure `radiusapp.tech` domain is registered
    - Set up HTTPS/SSL certificate
 
 ### Submit to Search Engines
 
 1. **Google Search Console**
-   - Add property for `https://radiusconnect.tech`
-   - Submit sitemap: `https://radiusconnect.tech/sitemap.xml`
+   - Add property for `https://radiusapp.tech`
+   - Submit sitemap: `https://radiusapp.tech/sitemap.xml`
    - Request indexing of homepage
 
 2. **Bing Webmaster Tools**

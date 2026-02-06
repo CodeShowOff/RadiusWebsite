@@ -1,6 +1,7 @@
 .why-radius-section {
   padding: 120px 0;
   position: relative;
+  contain: layout style;
 }
 
 .why-radius-section::before {

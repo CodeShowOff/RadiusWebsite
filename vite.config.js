@@ -7,13 +7,29 @@ export default defineConfig({
   build: {
     // Generate source maps for better debugging
     sourcemap: false,
+    // Target modern browsers for smaller bundles
+    target: 'es2020',
     // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          animations: ['framer-motion'],
+          // Split vendor chunks for better caching
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-router': ['react-router-dom'],
+          // Framer-motion is large, keep it separate for lazy loading
+          'vendor-animations': ['framer-motion'],
+          // Lucide icons - only used icons will be included via tree-shaking
+          'vendor-icons': ['lucide-react'],
         },
+        // Optimize chunk file names for caching
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+      },
+      // Tree-shake unused exports
+      treeshake: {
+        moduleSideEffects: false,
+        propertyReadSideEffects: false,
       },
     },
     // Minify for production
@@ -22,8 +38,23 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
+      },
+      format: {
+        comments: false,
       },
     },
+    // Set chunk size warning limit
+    chunkSizeWarningLimit: 500,
+    // CSS optimization
+    cssCodeSplit: true,
+    cssMinify: true,
+    // Inline small assets
+    assetsInlineLimit: 4096,
   },
   // Enable gzip compression hints
   server: {
@@ -32,5 +63,10 @@ export default defineConfig({
       'X-Frame-Options': 'SAMEORIGIN',
       'X-XSS-Protection': '1; mode=block',
     },
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['framer-motion'],
   },
 })

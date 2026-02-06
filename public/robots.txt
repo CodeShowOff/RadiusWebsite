@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://radiusconnect.tech/sitemap.xml
+Sitemap: https://radiusapp.tech/sitemap.xml
 
 # Disallow admin or private paths (add as needed)
 Disallow: /admin/

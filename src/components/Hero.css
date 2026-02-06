@@ -5,6 +5,7 @@
   align-items: center;
   padding-top: 80px;
   overflow: hidden;
+  contain: layout style;
 }
 
 /* Visually hidden for SEO - keeps content for search engines but hides from users */
