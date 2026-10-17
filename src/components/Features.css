@@ -241,50 +241,6 @@
   }
 }
 
-/* Sale Alert Banner */
-.features-sale-alert {
-  background: rgba(255, 59, 48, 0.15);
-  border: 2px solid rgba(255, 59, 48, 0.5);
-  border-radius: 12px;
-  padding: 16px 24px;
-  margin-bottom: 40px;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(255, 59, 48, 0.3);
-  animation: alert-pulse 2s infinite;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (max-width: 768px) {
-  .features-sale-alert {
-    font-size: 0.95rem;
-    padding: 12px 16px;
-    margin-bottom: 30px;
-  }
-}
-
-@keyframes alert-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(255, 59, 48, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
-}
-
-.features-sale-alert a {
-  color: #ffda75;
-  text-decoration: underline;
-  transition: color 0.3s ease;
-}
-
-.features-sale-alert a:hover {
-  color: #fff;
-}
-
 /* Screenshots Carousel */
 .screenshots-carousel-container {
   margin-top: 80px;
