@@ -133,15 +133,6 @@ const Features = () => {
   return (
     <section id="features" className="features-section" ref={ref} aria-labelledby="features-title">
       <div className="container">
-        <motion.div
-          className="features-sale-alert"
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          🚨 <strong>PROJECT ON SALE!</strong> Contact <a href="mailto:connectme.shubham@gmail.com">connectme.shubham@gmail.com</a> to purchase.
-        </motion.div>
-
         <motion.header
           className="features-header"
           initial={{ opacity: 0, y: 20 }}
